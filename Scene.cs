@@ -8,6 +8,7 @@ namespace Snake
 {
     internal class Scene
     {
+
         private int _width;
         private int _height;
         private TimeSpan _roundTime;
@@ -22,7 +23,7 @@ namespace Snake
         {
         
         }
-        private void EnemyMove() 
+        private void EnemyMove(Snake snake) 
         {
         
         }
