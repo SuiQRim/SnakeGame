@@ -19,15 +19,6 @@ namespace SnakeGame
         private bool _isFull;
         private bool _isAlive;
 
-
-        private event Action<ConsoleKey> Direction_KeyClick;
-
-        public Direction _direction;
-
-        private async void MoveUpData()
-        {
-        }
-
         public Skin Skin { get; set; }
 
         public char[,] BodyMap
