@@ -8,20 +8,23 @@ namespace SnakeGame
 {
     internal class View
     {
-        public void WriteMap(Scene scene) 
+
+        public void WriteMap(char [,] map) 
         {
-            for (int i = 0; i < scene.Map.GetLength(0); i++)
+
+            Console.Clear();
+            for (int i = 0; i < map.GetLength(0); i++)
             {
-                for (int j = 0; j < scene.Map.GetLength(1); j++)
+                for (int j = 0; j < map.GetLength(1); j++)
                 {
 
-                    if (scene.Map[i, j] == default(char))
+                    if (map[i, j] == default(char))
                     {
                         Console.Write("  ");
                     }
                     else
                     {
-                        Console.Write(scene.Map[i, j] + " ");
+                        Console.Write($"{map[i, j]} ");
                     }
 
                 }

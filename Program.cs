@@ -1,7 +1,7 @@
 ﻿using SnakeGame;
-
-Scene scene = new(25,25, new SnakeGame.Snake());
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 View view = new ();
+Scene scene = new(25,25, new Snake(), view);
 
-view.WriteMap(scene);
+

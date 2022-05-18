@@ -10,16 +10,17 @@ namespace SnakeGame
     {
         public Snake()
         {
-
+            _isAlive = true;
         }
 
         // Сыт? Нужен для отращивания хвоста после получения поинта
         private int[] _headPos;
         private char[,] _bodyMap;
-        private bool IsFull;
-        
+        private bool _isFull;
+        private bool _isAlive;
 
-        private event Action<ConsoleKey> Direction_KeyClick; 
+
+        private event Action<ConsoleKey> Direction_KeyClick;
 
         public Direction _direction;
 
@@ -34,8 +35,13 @@ namespace SnakeGame
             get { return _bodyMap; }
         }
 
+        public void Die() { }
+        public bool IsAlive
+        {
+            get => _isAlive;
+        }
 
-        
-       
+
+
     }
 }

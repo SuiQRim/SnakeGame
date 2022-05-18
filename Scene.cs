@@ -8,12 +8,19 @@ namespace SnakeGame
 {
     internal class Scene
     {
-        public Scene(int width, int heigh, Snake snake)
+        public Scene(int width, int heigh, Snake snake, View view)
         {
             _width = width;
             _height = heigh;
             _snake = snake;
             CreateMap();
+            MapUpData += view.WriteMap;
+
+            StartSprint();
+            MapUpData?.Invoke(_map);
+
+            Thread.Sleep(1000);
+            SpawnPoint();
         }
 
         private Snake _snake;
@@ -27,16 +34,26 @@ namespace SnakeGame
             get { return _map; }
         }
 
-        private event Action<string> MapUpData;
+        private event Action<char [,]> MapUpData;
 
-        public void Sprint() 
+        public void StartSprint() 
         {
-            
+            while (_snake.IsAlive)
+            {
+                SpawnPoint();
+                MapUpData?.Invoke(_map);
+                Thread.Sleep(1000);
+            }
         }
 
         private void SpawnPoint() 
         {
-        
+            Random random = new();
+            int posX = random.Next(1, _width - 1);
+            int posY = random.Next(1, _height - 1);
+
+            _map[posX, posY] = point;
+            MapUpData?.Invoke(_map);
         }
         private void EnemyMove() 
         {
@@ -45,7 +62,8 @@ namespace SnakeGame
         
         private string PrintMap() { return ""; }
 
-        const char border = '#';
+        const char border = '';
+        const char point = '*';
         private void CreateMap() 
         {
             int wight = _width + 2;
