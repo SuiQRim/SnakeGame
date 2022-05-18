@@ -11,6 +11,8 @@ namespace SnakeGame
         public Snake()
         {
             _isAlive = true;
+            _moveController = new();
+            new Thread(() => _moveController.ReadAllKey()).Start();
         }
 
         // Сыт? Нужен для отращивания хвоста после получения поинта
@@ -18,6 +20,12 @@ namespace SnakeGame
         private char[,] _bodyMap;
         private bool _isFull;
         private bool _isAlive;
+
+        private MoveController _moveController;
+        public MoveController MoveController 
+        {
+            get { return _moveController; } 
+        }
 
         public Skin Skin { get; set; }
 
