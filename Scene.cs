@@ -55,7 +55,8 @@ namespace Snake
 
             for (int i = 0; i != wight; i++)
             {
-                _map[0, i] = border;     
+                _map[0, i] = border;
+                _map[height - 1, i] = border;
             }
 
             for (int i = 0; i < height; i++) 
@@ -63,11 +64,7 @@ namespace Snake
                 _map[i, 0] = border;
                 _map[i, wight - 1] = border;
             }
-
-            for (int i = 0; i < wight; i++)
-            {
-                _map[height - 1, i] = border;
-            }
         }
+
     }
 }
