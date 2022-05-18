@@ -8,13 +8,24 @@ namespace Snake
 {
     internal class Snake
     {
+        public Snake()
+        {
+
+        }
+        
+        private async void MoveUpData()
+        {
+        }
+
         public Skin Skin { get; set; }
 
         public int[] _headPos;
 
         public int[] _bodyPos;
 
-        public string _direction;
+        private event Action<ConsoleKey> Direction_KeyClick; 
+
+        public Direction _direction;
         
         // Сыт? Нужен для отращивания хвоста после получения поинта
         private bool IsFull;
