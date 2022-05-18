@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake.Orintation
+namespace SnakeGame.Orintation
 {
     internal class UpWard : Direction
     {

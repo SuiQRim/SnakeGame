@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake.Skins
+namespace SnakeGame.Skins
 {
     internal class DefaultSkin : Skin
     {
-        public DefaultSkin() : base('▣', '▣')
+        public DefaultSkin() : base('0', '+')
         {
         }
     }
