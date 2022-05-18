@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Snake.Orintation
 {
-    internal class Upward : Direction
+    internal class UpWard : Direction
     {
-        public Upward() : base ("Вверх", ConsoleKey.UpArrow)
+        public UpWard() : base ("Вверх", ConsoleKey.UpArrow)
         {
 
         }
