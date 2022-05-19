@@ -52,9 +52,10 @@ namespace SnakeGame
             int posX = random.Next(1, _width - 1);
             int posY = random.Next(1, _height - 1);
 
-            _map[posX, posY] = point;
+            _map[posX, posY] = POINT;
             MapUpData?.Invoke(_map);
         }
+
         private void EnemyMove() 
         {
         
@@ -62,8 +63,9 @@ namespace SnakeGame
         
         private string PrintMap() { return ""; }
 
-        const char border = '';
-        const char point = '*';
+        const char VERTICALBORDER = '|';
+        const char HORIZONTALBORDER = '—';
+        const char POINT = 'Ó';
         private void CreateMap() 
         {
             int wight = _width + 2;
@@ -73,14 +75,14 @@ namespace SnakeGame
 
             for (int i = 0; i != wight; i++)
             {
-                _map[0, i] = border;
-                _map[height - 1, i] = border;
+                _map[0, i] = HORIZONTALBORDER;
+                _map[height - 1, i] = HORIZONTALBORDER;
             }
 
             for (int i = 0; i < height; i++) 
             {
-                _map[i, 0] = border;
-                _map[i, wight - 1] = border;
+                _map[i, 0] = VERTICALBORDER;
+                _map[i, wight - 1] = VERTICALBORDER;
             }
         }
 
