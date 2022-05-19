@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SnakeGame.Orintation;
 
 namespace SnakeGame
 {
     internal class Scene
     {
+        private const int SLEEP = 200;
+
         public Scene(int width, int heigh, Snake snake, View view)
         {
             _width = width;
@@ -15,12 +18,11 @@ namespace SnakeGame
             _snake = snake;
             CreateMap();
             MapUpData += view.WriteMap;
+            SnakeUpData += view.WriteSnake;
 
+            _snake.ConfigureStartingParameters(width, heigh, width / 2, heigh / 2);
             StartSprint();
             MapUpData?.Invoke(_map);
-
-            Thread.Sleep(1000);
-            SpawnPoint();
         }
 
         private Snake _snake;
@@ -34,15 +36,18 @@ namespace SnakeGame
             get { return _map; }
         }
 
-        private event Action<char [,]> MapUpData;
+        private event Action<char[,]> MapUpData;
+        private event Action<char,Position,char[,]> SnakeUpData;
 
         public void StartSprint() 
         {
             while (_snake.IsAlive)
             {
-                SpawnPoint();
+                //SpawnPoint();
+                _snake.Move();
                 MapUpData?.Invoke(_map);
-                Thread.Sleep(1000);
+                SnakeUpData?.Invoke(_snake.Skin.MainDecoration, _snake.HeadPosition, _snake.BodyMap);
+                Thread.Sleep(SLEEP);
             }
         }
 
@@ -51,21 +56,31 @@ namespace SnakeGame
             Random random = new();
             int posX = random.Next(1, _width - 1);
             int posY = random.Next(1, _height - 1);
-
             _map[posX, posY] = POINT;
-            MapUpData?.Invoke(_map);
+         
         }
 
-        private void EnemyMove() 
+        private void CheckCollision() 
         {
-        
+            switch (Map[_snake.HeadPosition.PosX, _snake.HeadPosition.PosY])
+            {
+                case VERTICALBORDER:
+                    _snake.Die();
+                    break;
+                case HORIZONTALBORDER:
+                    _snake.Die();
+                    break;
+                case POINT:
+                    _snake.Eat();
+                    break;
+            }
+
         }
         
-        private string PrintMap() { return ""; }
-
-        const char VERTICALBORDER = '|';
-        const char HORIZONTALBORDER = '—';
+        const char VERTICALBORDER = '‖';
+        const char HORIZONTALBORDER = '=';
         const char POINT = 'Ó';
+
         private void CreateMap() 
         {
             int wight = _width + 2;

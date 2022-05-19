@@ -10,9 +10,7 @@ namespace SnakeGame
     internal class MoveController
     {
 
-        private event Action<ConsoleKey> Direction_KeyClick;
-
-        private Direction _direction;
+        private Direction _direction = new RightWard();
         public Direction Direction 
         { 
             get => _direction;
@@ -23,7 +21,6 @@ namespace SnakeGame
             while (true)
             {
                 ConsoleKey key = Console.ReadKey().Key;
-                Console.WriteLine(key);
                 DetermineDirection(key);
             }
 
