@@ -27,61 +27,70 @@ namespace SnakeGame
 
         private object cursor = new();
 
-        public void WriteScore(int score) 
+        public void WriteScoreBorder() 
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+
+            string text = "";
+            for (int i = 0; i < SCORE_VALUEMAXLENGTH; i++)
+            {
+                text += $"{UIHORIZONTALBORDER}";
+            }
+
+            Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN - 1);
+            Console.WriteLine(text);
+
+            Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN);
+            Console.WriteLine(UIVERTICALBORDER);
+
+            Console.SetCursorPosition(SCORE_LEFT_MARGIN + (SCORE_VALUEMAXLENGTH * 2) - 2, SCORE_TOP_MARGIN);
+            Console.WriteLine(UIVERTICALBORDER);
+
+            Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN + 1);
+            Console.WriteLine(text);
+
+        }
+
+        public void WriteTimeBorder() 
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+
+            string text = "";
+
+            for (int i = 0; i < TIME_VALUEMAXLENGTH; i++)
+            {
+                text += $"{UIHORIZONTALBORDER}";
+            }
+
+            Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN - 1);
+            Console.WriteLine(text);
+
+            Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN);
+            Console.WriteLine(UIVERTICALBORDER);
+
+            Console.SetCursorPosition(TIME_LEFT_MARGIN + (TIME_VALUEMAXLENGTH * 2) - 2, TIME_TOP_MARGIN);
+            Console.WriteLine(UIVERTICALBORDER);
+
+            Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN + 1);
+            Console.WriteLine(text);
+
+        }
+
+        public void UpDataScore(int score) 
         {
             lock (cursor) 
             {
-                Console.ForegroundColor = ConsoleColor.White;
-
-                string text = "";
-                for (int i = 0; i < SCORE_VALUEMAXLENGTH; i++)
-                {
-                    text += $"{UIHORIZONTALBORDER}";
-                }
-
-                Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN - 1);
-                Console.WriteLine(text);
-
-                Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN);
-                Console.WriteLine(UIVERTICALBORDER);
-
-                Console.SetCursorPosition(SCORE_LEFT_MARGIN + (SCORE_VALUEMAXLENGTH * 2) - 2, SCORE_TOP_MARGIN);
-                Console.WriteLine(UIVERTICALBORDER);
-
-                Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN + 1);
-                Console.WriteLine(text);
-
                 Console.ForegroundColor= ConsoleColor.Green;
                 Console.SetCursorPosition(SCORE_LEFT_MARGIN + LEFT_PADDING, SCORE_TOP_MARGIN);
                 Console.WriteLine($"{score,SCORE_VALUEMAXLENGTH - 1}");
             }
         }
 
-        public void WriteLifeTime(TimeSpan timeSpan) 
+        public void UpDataLifeTime(TimeSpan timeSpan) 
         {
             lock (cursor)
             {
-                Console.ForegroundColor = ConsoleColor.White;
-
-                string text = "";
-
-                for (int i = 0; i < TIME_VALUEMAXLENGTH; i++)
-                {
-                    text += $"{UIHORIZONTALBORDER}";
-                }
-
-                Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN - 1);
-                Console.WriteLine(text);
-
-                Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN);
-                Console.WriteLine(UIVERTICALBORDER);
-
-                Console.SetCursorPosition(TIME_LEFT_MARGIN + (TIME_VALUEMAXLENGTH * 2) - 2, TIME_TOP_MARGIN);
-                Console.WriteLine(UIVERTICALBORDER);
-
-                Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN + 1);
-                Console.WriteLine(text);
-
+             
 
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition( TIME_LEFT_MARGIN + LEFT_PADDING, TIME_TOP_MARGIN);

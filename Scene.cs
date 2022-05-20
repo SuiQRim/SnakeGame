@@ -12,10 +12,12 @@ namespace SnakeGame
 
             _mapSize = new Position(width, heigh);
 
+            view.WriteScoreBorder();
+            view.WriteTimeBorder();
             MapUpData += view.WriteMap;
             SnakeUpData += view.WriteSnake;
-            TimeUpData += view.WriteLifeTime;
-            ChangeScore += view.WriteScore;
+            TimeUpData += view.UpDataLifeTime;
+            ChangeScore += view.UpDataScore;
 
             StartSprint();
             MapUpData?.Invoke(_point, _mapSize);
