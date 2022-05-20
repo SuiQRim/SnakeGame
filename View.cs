@@ -7,66 +7,111 @@ using SnakeGame.SnakePrefab;
 
 namespace SnakeGame
 {
-    internal static  class View
+    internal class View
     {
 
-        private const int TOP_MARGIN = 5;
-        private const int LEFT_MARGIN = 10;
-        private const int TOP_BORDERPADDING = 2;
-        private const int LEFT_BORDERPADDING = 2;
+        private const int MAP_TOP_MARGIN = 5;
+        private const int MAP_LEFT_MARGIN = 10;
+        private const int MAP_TOP_PADDING = 2;
+        private const int MAP_LEFT_PADDING = 2;
+
+        private const int TIME_TOP_MARGIN = 3;
+        private const int TIME_LEFT_MARGIN = 8;
+
+        private const string UIHORIZONTALBORDER = "==";
+        private const string UIVERTICALBORDER = "‖‖";
         private const string VERTICALBORDER = "██";
         private const string HORIZONTALBORDER = "██";
         private const string POINT = "██";
 
-        public static void WriteMap(Point point, Position MaxPos)
+        private object cursor = new();
+
+        public void WriteLifeTime(TimeSpan timeSpan) 
         {
-            Console.ForegroundColor = ConsoleColor.White;
-            string text = "";
-            for (int i = 0; i < MaxPos.PosX * 2; i += 2)
+            lock (cursor)
             {
-                text += $"{HORIZONTALBORDER}";
+                Console.ForegroundColor = ConsoleColor.White;
+                int length = timeSpan.ToString().Length;
+
+                string text = "";
+
+                for (int i = 0; i < length; i++)
+                {
+                    text += $"{UIHORIZONTALBORDER}";
+                }
+
+                Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN - 1);
+                Console.WriteLine(text);
+
+                Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN);
+                Console.WriteLine(UIVERTICALBORDER);
+                Console.SetCursorPosition(TIME_LEFT_MARGIN + (length * 2) - 2, TIME_TOP_MARGIN);
+                Console.WriteLine(UIVERTICALBORDER);
+                Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN + 1);
+                Console.WriteLine(text);
+
+                
+                Console.SetCursorPosition( TIME_LEFT_MARGIN + MAP_LEFT_PADDING, TIME_TOP_MARGIN);
+                Console.WriteLine(timeSpan);
             }
-
-            Console.SetCursorPosition(LEFT_MARGIN, TOP_MARGIN);
-            Console.WriteLine(text);
-
-            Console.SetCursorPosition(LEFT_MARGIN, TOP_MARGIN + MaxPos.PosY);
-            Console.WriteLine(text);
-
-
-            for (int i = 0; i < MaxPos.PosX + 1; i++)
-            {
-                Console.SetCursorPosition(LEFT_MARGIN - LEFT_BORDERPADDING, TOP_MARGIN + i);
-                Console.Write($"{VERTICALBORDER}");
-                Console.SetCursorPosition(LEFT_MARGIN + LEFT_BORDERPADDING + (MaxPos.PosX * 2) - 2, TOP_MARGIN + i);
-                Console.Write($"{VERTICALBORDER}");
-            }
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(LEFT_MARGIN + (point.Position.PosX * 2), TOP_MARGIN + point.Position.PosY + 1);
-            Console.Write($"{POINT}");
         }
 
-        public static void WriteSnake(List<Segment> bodyList) 
+        public void WriteMap(Point point, Position mapSize)
         {
-            Segment tail = bodyList.Last();
-
-            Console.SetCursorPosition(LEFT_MARGIN + (tail.LastPosition.PosX * 2), TOP_MARGIN + tail.LastPosition.PosY + 1);
-            Console.Write("  ");
-            
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.SetCursorPosition(LEFT_MARGIN + (bodyList.First().Position.PosX * 2), TOP_MARGIN + bodyList.First().Position.PosY + 1);
-            
-            Console.Write(bodyList.First());
-            Console.ForegroundColor = ConsoleColor.Blue;
-            foreach (Segment segment in bodyList)
+            lock (cursor)
             {
-                if (segment.GetType() == typeof(Head)) continue;
+                Console.ForegroundColor = ConsoleColor.White;
+                string text = "";
+                for (int i = 0; i < mapSize.PosX * 2; i += 2)
+                {
+                    text += $"{HORIZONTALBORDER}";
+                }
 
-                Console.SetCursorPosition( LEFT_MARGIN + (segment.Position.PosX * 2), TOP_MARGIN +  segment.Position.PosY + 1);
-                Console.Write(segment);
+                Console.SetCursorPosition(MAP_LEFT_MARGIN, MAP_TOP_MARGIN);
+                Console.WriteLine(text);
+
+                Console.SetCursorPosition(MAP_LEFT_MARGIN, MAP_TOP_MARGIN + mapSize.PosY);
+                Console.WriteLine(text);
+
+
+                for (int i = 0; i < mapSize.PosX + 1; i++)
+                {
+                    Console.SetCursorPosition(MAP_LEFT_MARGIN - MAP_LEFT_PADDING, MAP_TOP_MARGIN + i);
+                    Console.Write($"{VERTICALBORDER}");
+                    Console.SetCursorPosition(MAP_LEFT_MARGIN + MAP_LEFT_PADDING + (mapSize.PosX * 2) - 2, MAP_TOP_MARGIN + i);
+                    Console.Write($"{VERTICALBORDER}");
+                }
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(MAP_LEFT_MARGIN + (point.Position.PosX * 2), MAP_TOP_MARGIN + point.Position.PosY + 1);
+                Console.Write($"{POINT}");
             }
+        }
 
+ 
+
+        public void WriteSnake(List<Segment> bodyList)
+        {
+            lock (cursor)
+            {
+                Segment tail = bodyList.Last();
+
+                Console.SetCursorPosition(MAP_LEFT_MARGIN + (tail.LastPosition.PosX * 2), MAP_TOP_MARGIN + tail.LastPosition.PosY + 1);
+                Console.Write("  ");
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(MAP_LEFT_MARGIN + (bodyList.First().Position.PosX * 2), MAP_TOP_MARGIN + bodyList.First().Position.PosY + 1);
+
+                Console.Write(bodyList.First());
+                Console.ForegroundColor = ConsoleColor.Blue;
+                foreach (Segment segment in bodyList)
+                {
+                    if (segment.GetType() == typeof(Head)) continue;
+
+                    Console.SetCursorPosition(MAP_LEFT_MARGIN + (segment.Position.PosX * 2), MAP_TOP_MARGIN + segment.Position.PosY + 1);
+                    Console.Write(segment);
+                }
+            }
         }
 
     }
