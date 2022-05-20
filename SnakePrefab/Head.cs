@@ -13,7 +13,6 @@ namespace SnakeGame.SnakePrefab
         public Head(Position position) : base(position)
         {
             _moveController = new();
-            new Thread(() => _moveController.ReadAllKey()).Start();
         }
 
 

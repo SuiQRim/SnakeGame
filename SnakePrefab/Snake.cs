@@ -14,18 +14,11 @@ namespace SnakeGame
 
         public Snake(Skin skin)
         {
+            
             _isAlive = true;
+            
         }
-
-        public void UpData()
-        {
-
-            if (_isFull)
-            {
-                Eat();
-            }
-            Move();
-        }
+    
         public void Eat()
         {
             _head.Grow();
@@ -53,8 +46,6 @@ namespace SnakeGame
             get => _head.AddToListOfSegment(new List<Segment>());
         }
 
-        // Сыт? Нужен для отращивания хвоста после получения поинта
-        private bool _isFull = true;
         private bool _isAlive;
 
         public void Die() { _isAlive = false; }

@@ -9,6 +9,10 @@ namespace SnakeGame
 {
     internal class DirectionController
     {
+        public DirectionController()
+        {
+            new Thread(() => ReadAllKey()).Start();
+        }
 
         private Direction _direction = new RightWard();
         public Direction Direction 

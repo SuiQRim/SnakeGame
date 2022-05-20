@@ -48,5 +48,10 @@ namespace SnakeGame
             if (pos1._posY != pos2.PosY ^ pos1._posX != pos2.PosX) { return true; }
             return false;
         }
+
+        public static Position operator +(Position pos1, int i)
+        {
+            return new Position(pos1.PosX + i, pos1.PosY + i);
+        }
     }
 }

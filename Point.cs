@@ -14,5 +14,9 @@ namespace SnakeGame
         }
 
         private Position _position;
+        public Position Position 
+        {
+            get => _position;
+        }
     }
 }

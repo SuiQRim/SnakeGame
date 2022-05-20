@@ -28,6 +28,7 @@ namespace SnakeGame
 
         private Snake _snake;
         private Point _point;
+        private bool _isPointExist;
 
         private int _width;
         private int _height;
@@ -46,8 +47,8 @@ namespace SnakeGame
         {
             while (_snake.IsAlive)
             {
-                //SpawnPoint();
-                _snake.UpData();
+                SpawnPoint();
+                _snake.Move();
                 CheckCollision();
                 MapUpData?.Invoke(_map);
                 SnakeUpData?.Invoke(_snake.BodyList);
@@ -57,13 +58,17 @@ namespace SnakeGame
 
         private void SpawnPoint() 
         {
-            Random random = new();
-            int posX = random.Next(1, _width - 1);
-            int posY = random.Next(1, _height - 1);
+            if (_isPointExist == false)
+            {
+                Random random = new();
+                int posX = random.Next(1, _width - 1);
+                int posY = random.Next(1, _height - 1);
 
-            _point = new(new Position(posX, posY));
-            _map[posX, posY] = POINT;
-         
+                _point = new(new Position(posX, posY ));
+                _map[posY, posX ] = POINT;
+
+                _isPointExist = true;
+            }
         }
 
         private void CheckCollision() 
@@ -76,11 +81,12 @@ namespace SnakeGame
                 case HORIZONTALBORDER:
                     _snake.Die();
                     break;
-                case POINT:
-                    _snake.Eat();
-                    break;
             }
-
+            if (_snake.HeadPosition + 2 == _point.Position)
+            {
+                _snake.Eat();
+                _isPointExist = false;
+            }
         }
         
         const char VERTICALBORDER = '‖';

@@ -35,8 +35,6 @@ namespace SnakeGame
 
         public void WriteSnake(List<Segment> bodyList) 
         {
-            string text;
-
             foreach (Segment segment in bodyList)
             {
                 Console.SetCursorPosition((2 + segment.Position.PosX) * 2, 2 + segment.Position.PosY);
