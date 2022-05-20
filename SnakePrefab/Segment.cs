@@ -57,7 +57,7 @@ namespace SnakeGame.SnakePrefab
 
             if (_childSegment != null)
             {
-                _childSegment.Move(_lastDirrection);
+                _childSegment.Move(_lastDirrection, Position);
             }
             _lastDirrection = direction;
         }

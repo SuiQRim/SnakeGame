@@ -11,7 +11,7 @@ namespace SnakeGame
     {
         private const int SLEEP = 250;
 
-        public Scene(int width, int heigh, Snake snake, View view)
+        public Scene(int width, int heigh, Snake snake)
         {
             _width = width;
             _height = heigh;
@@ -19,8 +19,8 @@ namespace SnakeGame
             minPos = new Position(0, 0);
             maxPos = new Position(width, heigh);
 
-            MapUpData += view.WriteMap;
-            SnakeUpData += view.WriteSnake;
+            MapUpData += View.WriteMap;
+            SnakeUpData += View.WriteSnake;
 
             _snake.ConfigureStartingParameters(0,0/*width / 2, heigh / 2*/);
             SpawnPoint();
@@ -81,9 +81,6 @@ namespace SnakeGame
             }
         }
         
-        const char VERTICALBORDER = '‖';
-        const char HORIZONTALBORDER = '=';
-        const char POINT = 'Ó';
 
     }
 }

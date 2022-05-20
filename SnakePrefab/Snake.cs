@@ -30,7 +30,7 @@ namespace SnakeGame
         }
         public void ConfigureStartingParameters(int headPosX, int headPosY)
         {
-            _head = new Head(new Position(headPosX, headPosY));
+            _head = new Head(new Position(headPosX, headPosY), this);
         }
 
         private Head _head;

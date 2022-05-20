@@ -12,9 +12,26 @@ namespace SnakeGame.SnakePrefab
         {
 
         }
+
         private bool _isCreated = true;
 
-        public void Move(Direction direction)
+        public bool CheckHeadCrashed(Position headPos) 
+        {
+            bool isCrashed = false;
+            if (headPos == this.Position) 
+            {
+                return true;
+            }
+
+            if (_childSegment != null)
+            {
+                isCrashed = _childSegment.CheckHeadCrashed(headPos);
+            }
+                 
+            return isCrashed;
+        }
+
+        public void Move(Direction direction, Position headPos)
         {
             if (_isCreated) { 
             
@@ -24,6 +41,10 @@ namespace SnakeGame.SnakePrefab
 
             MoveLogic(direction);
 
+            if (_childSegment != null)
+            {
+                _childSegment.CheckHeadCrashed(headPos);
+            }
         }
     }
 }
