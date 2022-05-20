@@ -22,12 +22,12 @@ namespace SnakeGame
 
         public static Position SearchClearPosition(List<Segment> segmentPositions, Position mapMax) 
         {
-            Random rnd = new Random();
+            Random rnd = new ();
             Position pos;
 
             do
             {
-                pos = new Position(rnd.Next(1, mapMax.PosX), rnd.Next(1, mapMax.PosY));
+                pos = new Position(rnd.Next(1, mapMax.PosX), rnd.Next(1, mapMax.PosY) - 1);
             } 
             while (segmentPositions.Any(s => s.Position == pos));
 

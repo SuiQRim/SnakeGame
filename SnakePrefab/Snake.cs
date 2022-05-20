@@ -12,13 +12,14 @@ namespace SnakeGame
     internal class Snake
     {
 
-        public Snake(Skin skin)
+        public Snake(Skin skin, int headPosX, int headPosY)
         {
             
             _isAlive = true;
-            
+            _head = new Head(new Position(headPosX / 2, headPosY / 2), this);
         }
-    
+
+        
         public void Eat()
         {
             _head.Grow();
@@ -28,9 +29,9 @@ namespace SnakeGame
         {
             _head.Move();
         }
-        public void ConfigureStartingParameters(int headPosX, int headPosY)
+        public void TouchintWall()
         {
-            _head = new Head(new Position(headPosX, headPosY), this);
+            Die();
         }
 
         private Head _head;

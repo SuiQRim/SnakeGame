@@ -9,7 +9,7 @@ namespace SnakeGame
 {
     internal class Scene
     {
-        private const int SLEEP = 250;
+        private const int SLEEP = 150;
 
         public Scene(int width, int heigh, Snake snake)
         {
@@ -19,8 +19,6 @@ namespace SnakeGame
 
             MapUpData += View.WriteMap;
             SnakeUpData += View.WriteSnake;
-
-            _snake.ConfigureStartingParameters(width / 2, heigh / 2);
 
             StartSprint();
             MapUpData?.Invoke( _point, _mapSize);
@@ -78,13 +76,22 @@ namespace SnakeGame
 
         private void CheckCollision() 
         {
+            CheckTouchWithBorder(_snake.HeadPosition);
             if (_snake.HeadPosition == _point.Position)
             {
                 _snake.Eat();
                 _isPointExist = false;
             }
         }
-        
+
+        private void CheckTouchWithBorder(Position headPos) 
+        {
+            if (headPos.PosX == -1 || headPos.PosX == _mapSize.PosX || headPos.PosY == -1 || headPos.PosY == _mapSize.PosY - 1)
+            {
+                _snake.TouchintWall();
+            }
+
+        }
 
     }
 }
