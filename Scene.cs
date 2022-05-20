@@ -15,7 +15,7 @@ namespace SnakeGame
         {
             _snake = snake;
 
-            mapSize = new Position(width, heigh);
+            _mapSize = new Position(width, heigh);
 
             MapUpData += View.WriteMap;
             SnakeUpData += View.WriteSnake;
@@ -23,7 +23,7 @@ namespace SnakeGame
             _snake.ConfigureStartingParameters(width / 2, heigh / 2);
 
             StartSprint();
-            MapUpData?.Invoke( _point, mapSize);
+            MapUpData?.Invoke( _point, _mapSize);
         }
 
         private Snake _snake;
@@ -31,7 +31,7 @@ namespace SnakeGame
 
         private bool _isPointExist = false;
 
-        private Position mapSize;
+        private Position _mapSize;
 
         private TimeSpan _roundTime;
 
@@ -53,7 +53,7 @@ namespace SnakeGame
                     SpawnPoint();
                 }
                  
-                MapUpData?.Invoke(_point, mapSize);
+                MapUpData?.Invoke(_point, _mapSize);
                 SnakeUpData?.Invoke(_snake.BodyList);
                 
                 Thread.Sleep(SLEEP);
@@ -69,10 +69,9 @@ namespace SnakeGame
         {
             if (_isPointExist == false)
             {
-                int posX = random.Next(1, mapSize.PosX - 1);
-                int posY = random.Next(1, mapSize.PosY - 1);
+                Position pos = Point.SearchClearPosition(_snake.BodyList, _mapSize);
 
-                _point = new(new Position(posX, posY));
+                _point = new(new Position(pos));
                 _isPointExist = true;
             }
         }
