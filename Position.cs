@@ -13,6 +13,11 @@ namespace SnakeGame
 
         }
 
+        public Position(Position position)
+        {
+            PosX = position.PosX;
+            PosY = position.PosY;
+        }
         public Position(int x, int y)
         {
             _posX = x;

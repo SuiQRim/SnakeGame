@@ -10,7 +10,7 @@ namespace SnakeGame
 {
     internal class Scene
     {
-        private const int SLEEP = 100;
+        private const int SLEEP = 250;
 
         public Scene(int width, int heigh, Snake snake, View view)
         {
@@ -47,7 +47,7 @@ namespace SnakeGame
             while (_snake.IsAlive)
             {
                 //SpawnPoint();
-                _snake.Move();
+                _snake.UpData();
                 MapUpData?.Invoke(_map);
                 SnakeUpData?.Invoke(_snake.BodyList);
                 Thread.Sleep(SLEEP);

@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using SnakeGame.Orintation;
 
 namespace SnakeGame.SnakePrefab
 {
     internal abstract class Segment
     {
+        public Segment(Position position)
+        {
+            _position = position;
+        }
+
         private Position _position;
         public Position Position
         {
@@ -15,12 +22,64 @@ namespace SnakeGame.SnakePrefab
             protected set => _position = value;
         }
 
-        public abstract void Move();
+        protected Direction _lastDirrection;
 
-        private static readonly char _view;
+        public void Grow() 
+        {
+            if (_childSegment == null)
+            {
+                _childSegment = new Body(new Position(_position));
+            }
+            else
+            {
+                _childSegment.Grow();
+            }
+        }
+
+        protected void MoveLogic(Direction direction) 
+        {
+            switch (direction)
+            {
+                case UpWard:
+                    Position.PosY--;
+                    break;
+                case DownWard:
+                    Position.PosY++;
+                    break;
+                case RightWard:
+                    Position.PosX++;
+                    break;
+                case LeftWard:
+                    Position.PosX--;
+                    break;
+            }
+
+            if (_childSegment != null)
+            {
+                _childSegment.Move(_lastDirrection);
+            }
+            _lastDirrection = direction;
+        }
+
+        protected Body _childSegment;
+
+        public List<Segment> AddToListOfSegment(List<Segment> segmentList) 
+        {
+            segmentList.Add(this);
+
+            if (_childSegment != null)
+            {
+                _childSegment.AddToListOfSegment(segmentList);
+            }
+
+            return segmentList;
+        }
+
+        private static readonly char _view = 'O';
         public override string ToString()
         {
             return _view.ToString();
         }
+
     }
 }

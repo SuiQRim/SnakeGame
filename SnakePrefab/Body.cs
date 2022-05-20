@@ -8,20 +8,22 @@ namespace SnakeGame.SnakePrefab
 {
     internal class Body : Segment
     {
-        public Body()
+        public Body(Position position) : base(position)
         {
 
         }
+        private bool _isCreated = true;
 
-        private event Action<Position> moved;
+        public void Move(Direction direction)
+        {
+            if (_isCreated) { 
+            
+                _isCreated = false;
+                return;
+            }
 
-        private void Follow(Position pos) 
-        {
-            
-        }
-        public override void Move()
-        {
-            
+            MoveLogic(direction);
+
         }
     }
 }

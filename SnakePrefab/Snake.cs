@@ -11,30 +11,45 @@ namespace SnakeGame
 {
     internal class Snake
     {
+
         public Snake(Skin skin)
         {
             _isAlive = true;
         }
 
-        public void Eat() { }
+        public void UpData() 
+        {
+          
+            if (_isFull) 
+            {
+                Eat();
+            }
+            Move();
+        }
+        public void Eat() 
+        {
+            _head.Grow();
+        }
 
         public void Move() 
         {
-            _bodyList.Where(s => s.GetType() == typeof(Head)).SingleOrDefault().Move();
+            _head.Move();
         }
         public void ConfigureStartingParameters(int headPosX, int headPosY)
         {
-            _bodyList = new List<Segment> { new Head(new Position(headPosX, headPosY))};
+            _head = new Head(new Position(headPosX, headPosY));
+
         }
 
-        private List<Segment> _bodyList;
+        private Head _head;
+
         public List<Segment> BodyList 
-        { 
-            get => _bodyList;
+        {
+            get => _head.AddToListOfSegment(new List<Segment>());
         }
 
         // Сыт? Нужен для отращивания хвоста после получения поинта
-        private bool _isFull;
+        private bool _isFull = true;
         private bool _isAlive;
 
         public void Die() { _isAlive = false; }
