@@ -22,8 +22,9 @@ namespace SnakeGame
             SnakeUpData += view.WriteSnake;
 
             _snake.ConfigureStartingParameters(width / 2, heigh / 2);
+            SpawnPoint();
             StartSprint();
-            MapUpData?.Invoke(_map);
+            MapUpData?.Invoke(_map, _point);
         }
 
         private Snake _snake;
@@ -40,18 +41,18 @@ namespace SnakeGame
             get { return _map; }
         }
 
-        private event Action<char[,]> MapUpData;
+        private event Action<char[,], Point> MapUpData;
         private event Action<List<Segment>> SnakeUpData;
 
         public void StartSprint() 
         {
             while (_snake.IsAlive)
             {
-                SpawnPoint();
                 _snake.Move();
                 CheckCollision();
-                MapUpData?.Invoke(_map);
+                MapUpData?.Invoke(_map, _point);
                 SnakeUpData?.Invoke(_snake.BodyList);
+
                 Thread.Sleep(SLEEP);
             }
         }
@@ -65,8 +66,6 @@ namespace SnakeGame
                 int posY = random.Next(1, _height - 1);
 
                 _point = new(new Position(posX, posY ));
-                _map[posY, posX ] = POINT;
-
                 _isPointExist = true;
             }
         }
@@ -82,9 +81,10 @@ namespace SnakeGame
                     _snake.Die();
                     break;
             }
-            if (_snake.HeadPosition + 2 == _point.Position)
+            if (_snake.HeadPosition + 1 == _point.Position)
             {
                 _snake.Eat();
+                SpawnPoint();
                 _isPointExist = false;
             }
         }

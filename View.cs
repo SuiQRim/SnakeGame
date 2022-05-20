@@ -10,7 +10,7 @@ namespace SnakeGame
     internal class View
     {
 
-        public void WriteMap(char [,] map) 
+        public void WriteMap(char [,] map, Point point) 
         {
 
             Console.Clear();
@@ -31,6 +31,8 @@ namespace SnakeGame
                 }
                 Console.WriteLine();
             }
+            Console.SetCursorPosition((point.Position.PosX + 1 ) * 2, point.Position.PosY + 1);
+            Console.Write('=');
         }
 
         public void WriteSnake(List<Segment> bodyList) 
