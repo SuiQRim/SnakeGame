@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SnakeGame.SnakePrefab;
+﻿using SnakeGame.SnakePrefab;
 
 namespace SnakeGame
 {
@@ -20,6 +15,7 @@ namespace SnakeGame
             MapUpData += view.WriteMap;
             SnakeUpData += view.WriteSnake;
             TimeUpData += view.WriteLifeTime;
+            ChangeScore += view.WriteScore;
 
             StartSprint();
             MapUpData?.Invoke(_point, _mapSize);
@@ -27,6 +23,7 @@ namespace SnakeGame
 
         private Snake _snake;
         private Point _point;
+        private int _score;
 
         private bool _isPointExist = false;
 
@@ -39,11 +36,13 @@ namespace SnakeGame
         private event Action<TimeSpan> TimeUpData;
 
         private event Action<List<Segment>> SnakeUpData;
+        private event Action<int> ChangeScore;
 
-        public void StartSprint() 
+        private void StartSprint() 
         {
             DateTime start = DateTime.Now;
             new Thread(() => TimeStep()).Start();
+
             SpawnPoint();
 
             while (_snake.IsAlive)
@@ -82,6 +81,7 @@ namespace SnakeGame
             if (_snake.HeadPosition == _point.Position)
             {
                 _snake.Eat();
+                ChangeScore?.Invoke(++_score);
                 _isPointExist = false;
             }
         }

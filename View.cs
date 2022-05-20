@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SnakeGame.SnakePrefab;
+﻿using SnakeGame.SnakePrefab;
 
 namespace SnakeGame
 {
@@ -12,30 +7,65 @@ namespace SnakeGame
 
         private const int MAP_TOP_MARGIN = 5;
         private const int MAP_LEFT_MARGIN = 10;
-        private const int MAP_TOP_PADDING = 2;
-        private const int MAP_LEFT_PADDING = 2;
+
+        private const int TOP_PADDING = 2;
+        private const int LEFT_PADDING = 2;
 
         private const int TIME_TOP_MARGIN = 3;
         private const int TIME_LEFT_MARGIN = 8;
+        private const int TIME_VALUEMAXLENGTH = 8;
 
-        private const string UIHORIZONTALBORDER = "==";
-        private const string UIVERTICALBORDER = "‖‖";
+        private const int SCORE_TOP_MARGIN = 3;
+        private const int SCORE_LEFT_MARGIN = TIME_LEFT_MARGIN + (TIME_VALUEMAXLENGTH * 2) + 2;
+        private const int SCORE_VALUEMAXLENGTH = 4;
+
+        private const string UIHORIZONTALBORDER = "——";
+        private const string UIVERTICALBORDER = "||";
         private const string VERTICALBORDER = "██";
         private const string HORIZONTALBORDER = "██";
         private const string POINT = "██";
 
         private object cursor = new();
 
+        public void WriteScore(int score) 
+        {
+            lock (cursor) 
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+
+                string text = "";
+                for (int i = 0; i < SCORE_VALUEMAXLENGTH; i++)
+                {
+                    text += $"{UIHORIZONTALBORDER}";
+                }
+
+                Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN - 1);
+                Console.WriteLine(text);
+
+                Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN);
+                Console.WriteLine(UIVERTICALBORDER);
+
+                Console.SetCursorPosition(SCORE_LEFT_MARGIN + (SCORE_VALUEMAXLENGTH * 2) - 2, SCORE_TOP_MARGIN);
+                Console.WriteLine(UIVERTICALBORDER);
+
+                Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN + 1);
+                Console.WriteLine(text);
+
+                Console.ForegroundColor= ConsoleColor.Green;
+                Console.SetCursorPosition(SCORE_LEFT_MARGIN + LEFT_PADDING, SCORE_TOP_MARGIN);
+                Console.WriteLine($"{score,SCORE_VALUEMAXLENGTH - 1}");
+            }
+        }
+
         public void WriteLifeTime(TimeSpan timeSpan) 
         {
             lock (cursor)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                int length = timeSpan.ToString().Length;
 
                 string text = "";
 
-                for (int i = 0; i < length; i++)
+                for (int i = 0; i < TIME_VALUEMAXLENGTH; i++)
                 {
                     text += $"{UIHORIZONTALBORDER}";
                 }
@@ -45,13 +75,16 @@ namespace SnakeGame
 
                 Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN);
                 Console.WriteLine(UIVERTICALBORDER);
-                Console.SetCursorPosition(TIME_LEFT_MARGIN + (length * 2) - 2, TIME_TOP_MARGIN);
+
+                Console.SetCursorPosition(TIME_LEFT_MARGIN + (TIME_VALUEMAXLENGTH * 2) - 2, TIME_TOP_MARGIN);
                 Console.WriteLine(UIVERTICALBORDER);
+
                 Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN + 1);
                 Console.WriteLine(text);
 
-                
-                Console.SetCursorPosition( TIME_LEFT_MARGIN + MAP_LEFT_PADDING, TIME_TOP_MARGIN);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition( TIME_LEFT_MARGIN + LEFT_PADDING, TIME_TOP_MARGIN);
                 Console.WriteLine(timeSpan);
             }
         }
@@ -76,9 +109,9 @@ namespace SnakeGame
 
                 for (int i = 0; i < mapSize.PosX + 1; i++)
                 {
-                    Console.SetCursorPosition(MAP_LEFT_MARGIN - MAP_LEFT_PADDING, MAP_TOP_MARGIN + i);
+                    Console.SetCursorPosition(MAP_LEFT_MARGIN - LEFT_PADDING, MAP_TOP_MARGIN + i);
                     Console.Write($"{VERTICALBORDER}");
-                    Console.SetCursorPosition(MAP_LEFT_MARGIN + MAP_LEFT_PADDING + (mapSize.PosX * 2) - 2, MAP_TOP_MARGIN + i);
+                    Console.SetCursorPosition(MAP_LEFT_MARGIN + LEFT_PADDING + (mapSize.PosX * 2) - 2, MAP_TOP_MARGIN + i);
                     Console.Write($"{VERTICALBORDER}");
                 }
 
