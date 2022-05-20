@@ -52,8 +52,10 @@ namespace SnakeGame
                 {
                     SpawnPoint();
                 }
+                 
                 MapUpData?.Invoke(_point, mapSize);
                 SnakeUpData?.Invoke(_snake.BodyList);
+                
                 Thread.Sleep(SLEEP);
             }
             DateTime end = DateTime.Now;

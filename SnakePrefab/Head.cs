@@ -14,7 +14,7 @@ namespace SnakeGame.SnakePrefab
         {
             _moveController = new();
             HeadCrash += snake.Die;
-            _childSegment = new Body(new Position(position));
+            _childSegment = new Body(new Position(position), position);
         }
 
         private event Action HeadCrash;

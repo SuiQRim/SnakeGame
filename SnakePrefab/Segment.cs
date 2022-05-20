@@ -14,6 +14,7 @@ namespace SnakeGame.SnakePrefab
         {
             _view = view;
             _position = position;
+
         }
 
         private Position _position;
@@ -23,13 +24,20 @@ namespace SnakeGame.SnakePrefab
             protected set => _position = value;
         }
 
+        private Position _lastPosition;
+        public Position LastPosition
+        {
+            get => _lastPosition;
+            protected set => _lastPosition = value;
+        }
+
         protected Direction _lastDirrection;
 
         public void Grow() 
         {
             if (_childSegment == null)
             {
-                _childSegment = new Body(new Position(_position));
+                _childSegment = new Body(new Position(_position), LastPosition);
             }
             else
             {
@@ -39,6 +47,7 @@ namespace SnakeGame.SnakePrefab
 
         protected void MoveLogic(Direction direction) 
         {
+         
             switch (direction)
             {
                 case UpWard:

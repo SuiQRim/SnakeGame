@@ -21,7 +21,6 @@ namespace SnakeGame
         public static void WriteMap(Point point, Position MaxPos)
         {
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Clear();
             string text = "";
             for (int i = 0; i < MaxPos.PosX * 2; i += 2)
             {
@@ -50,12 +49,15 @@ namespace SnakeGame
 
         public static void WriteSnake(List<Segment> bodyList) 
         {
+            Segment tail = bodyList.Last();
 
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.SetCursorPosition(LEFT_MARGIN + (bodyList[0].Position.PosX * 2), TOP_MARGIN + bodyList[0].Position.PosY + 1);
+            Console.SetCursorPosition(LEFT_MARGIN + (tail.LastPosition.PosX * 2), TOP_MARGIN + tail.LastPosition.PosY + 1);
+            Console.Write("  ");
             
-            Console.Write(bodyList[0]);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(LEFT_MARGIN + (bodyList.First().Position.PosX * 2), TOP_MARGIN + bodyList.First().Position.PosY + 1);
+            
+            Console.Write(bodyList.First());
             Console.ForegroundColor = ConsoleColor.Blue;
             foreach (Segment segment in bodyList)
             {

@@ -8,9 +8,9 @@ namespace SnakeGame.SnakePrefab
 {
     internal class Body : Segment
     {
-        public Body(Position position) : base(position, "██")
+        public Body(Position position, Position lastPosition) : base(position, "██")
         {
-
+            LastPosition = lastPosition;
         }
 
         private bool _isCreated = true;
@@ -33,6 +33,7 @@ namespace SnakeGame.SnakePrefab
 
         public void Move(Direction direction, Position headPos)
         {
+            LastPosition = new(Position);
             if (_isCreated) { 
             
                 _isCreated = false;
