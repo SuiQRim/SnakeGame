@@ -10,7 +10,7 @@ namespace SnakeGame.SnakePrefab
     internal class Head : Segment
     {
 
-        public Head(Position position) : base(position)
+        public Head(Position position) : base(position, '@')
         {
             _moveController = new();
         }
