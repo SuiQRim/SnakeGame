@@ -7,13 +7,14 @@ using SnakeGame.Orintation;
 
 namespace SnakeGame
 {
-    internal class MoveController
+    internal class DirectionController
     {
 
         private Direction _direction = new RightWard();
         public Direction Direction 
         { 
             get => _direction;
+            set => _direction = value;
         }
 
         public void ReadAllKey()
@@ -43,7 +44,6 @@ namespace SnakeGame
                     _direction = new LeftWard();
                     break;
             }
-
         }
     }
 }

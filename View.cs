@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SnakeGame.SnakePrefab;
 
 namespace SnakeGame
 {
@@ -32,33 +33,16 @@ namespace SnakeGame
             }
         }
 
-        public void WriteSnake(char head,Position headPos, char [,] bodyMap) 
+        public void WriteSnake(List<Segment> bodyList) 
         {
             string text;
 
-            for (int i = 0; i < bodyMap.GetLength(0); i++)
+            foreach (Segment segment in bodyList)
             {
-                text = "";
-                for (int j = 0; j < bodyMap.GetLength(1); j++)
-                {
-
-                    if (bodyMap[i, j] == default(char))
-                    {
-                        text += "  ";
-                    }
-                    else
-                    {
-                        text += $"{bodyMap[i, j]} ";
-                    }
-                    Console.SetCursorPosition(2, i + 1);
-                    
-                }
-                Console.WriteLine(text);
-
+                Console.SetCursorPosition((2 + segment.Position.PosX) * 2, 1 + segment.Position.PosY);
+                Console.Write('@');
             }
 
-            Console.SetCursorPosition(headPos.PosX * 2, headPos.PosY);
-            Console.Write(head);
         }
 
     }

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SnakeGame.Orintation;
+using SnakeGame.SnakePrefab;
 
 namespace SnakeGame
 {
     internal class Scene
     {
-        private const int SLEEP = 200;
+        private const int SLEEP = 100;
 
         public Scene(int width, int heigh, Snake snake, View view)
         {
@@ -20,12 +21,14 @@ namespace SnakeGame
             MapUpData += view.WriteMap;
             SnakeUpData += view.WriteSnake;
 
-            _snake.ConfigureStartingParameters(width, heigh, width / 2, heigh / 2);
+            _snake.ConfigureStartingParameters(width / 2, heigh / 2);
             StartSprint();
             MapUpData?.Invoke(_map);
         }
 
         private Snake _snake;
+        private Point _point;
+
         private int _width;
         private int _height;
         private TimeSpan _roundTime;
@@ -37,7 +40,7 @@ namespace SnakeGame
         }
 
         private event Action<char[,]> MapUpData;
-        private event Action<char,Position,char[,]> SnakeUpData;
+        private event Action<List<Segment>> SnakeUpData;
 
         public void StartSprint() 
         {
@@ -46,7 +49,7 @@ namespace SnakeGame
                 //SpawnPoint();
                 _snake.Move();
                 MapUpData?.Invoke(_map);
-                SnakeUpData?.Invoke(_snake.Skin.MainDecoration, _snake.HeadPosition, _snake.BodyMap);
+                SnakeUpData?.Invoke(_snake.BodyList);
                 Thread.Sleep(SLEEP);
             }
         }
@@ -56,24 +59,26 @@ namespace SnakeGame
             Random random = new();
             int posX = random.Next(1, _width - 1);
             int posY = random.Next(1, _height - 1);
+
+            _point = new(new Position(posX, posY));
             _map[posX, posY] = POINT;
          
         }
 
         private void CheckCollision() 
         {
-            switch (Map[_snake.HeadPosition.PosX, _snake.HeadPosition.PosY])
-            {
-                case VERTICALBORDER:
-                    _snake.Die();
-                    break;
-                case HORIZONTALBORDER:
-                    _snake.Die();
-                    break;
-                case POINT:
-                    _snake.Eat();
-                    break;
-            }
+            //switch (Map[_snake.HeadPosition.PosX, _snake.HeadPosition.PosY])
+            //{
+            //    case VERTICALBORDER:
+            //        _snake.Die();
+            //        break;
+            //    case HORIZONTALBORDER:
+            //        _snake.Die();
+            //        break;
+            //    case POINT:
+            //        _snake.Eat();
+            //        break;
+            //}
 
         }
         
