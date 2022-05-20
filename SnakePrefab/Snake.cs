@@ -17,21 +17,21 @@ namespace SnakeGame
             _isAlive = true;
         }
 
-        public void UpData() 
+        public void UpData()
         {
-          
-            if (_isFull) 
+
+            if (_isFull)
             {
                 Eat();
             }
             Move();
         }
-        public void Eat() 
+        public void Eat()
         {
             _head.Grow();
         }
 
-        public void Move() 
+        public void Move()
         {
             _head.Move();
         }
@@ -42,6 +42,11 @@ namespace SnakeGame
         }
 
         private Head _head;
+
+        public Position HeadPosition 
+        {
+            get => _head.Position;
+        }
 
         public List<Segment> BodyList 
         {

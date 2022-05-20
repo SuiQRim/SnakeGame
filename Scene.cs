@@ -48,6 +48,7 @@ namespace SnakeGame
             {
                 //SpawnPoint();
                 _snake.UpData();
+                CheckCollision();
                 MapUpData?.Invoke(_map);
                 SnakeUpData?.Invoke(_snake.BodyList);
                 Thread.Sleep(SLEEP);
@@ -67,18 +68,18 @@ namespace SnakeGame
 
         private void CheckCollision() 
         {
-            //switch (Map[_snake.HeadPosition.PosX, _snake.HeadPosition.PosY])
-            //{
-            //    case VERTICALBORDER:
-            //        _snake.Die();
-            //        break;
-            //    case HORIZONTALBORDER:
-            //        _snake.Die();
-            //        break;
-            //    case POINT:
-            //        _snake.Eat();
-            //        break;
-            //}
+            switch (Map[_snake.HeadPosition.PosX + 2, _snake.HeadPosition.PosY + 2])
+            {
+                case VERTICALBORDER:
+                    _snake.Die();
+                    break;
+                case HORIZONTALBORDER:
+                    _snake.Die();
+                    break;
+                case POINT:
+                    _snake.Eat();
+                    break;
+            }
 
         }
         

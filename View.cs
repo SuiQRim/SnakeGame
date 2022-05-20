@@ -39,7 +39,7 @@ namespace SnakeGame
 
             foreach (Segment segment in bodyList)
             {
-                Console.SetCursorPosition((2 + segment.Position.PosX) * 2, 1 + segment.Position.PosY);
+                Console.SetCursorPosition((2 + segment.Position.PosX) * 2, 2 + segment.Position.PosY);
                 Console.Write('@');
             }
 
