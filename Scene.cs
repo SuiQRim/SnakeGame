@@ -13,31 +13,25 @@ namespace SnakeGame
 
         public Scene(int width, int heigh, Snake snake)
         {
-            _width = width;
-            _height = heigh;
             _snake = snake;
-            minPos = new Position(0, 0);
-            maxPos = new Position(width, heigh);
+
+            mapSize = new Position(width, heigh);
 
             MapUpData += View.WriteMap;
             SnakeUpData += View.WriteSnake;
 
-            _snake.ConfigureStartingParameters(0,0/*width / 2, heigh / 2*/);
-            SpawnPoint();
-            MapUpData?.Invoke(_point, maxPos);
+            _snake.ConfigureStartingParameters(width / 2, heigh / 2);
+
             StartSprint();
-            MapUpData?.Invoke( _point, maxPos);
+            MapUpData?.Invoke( _point, mapSize);
         }
 
         private Snake _snake;
         private Point _point;
-        private bool _isPointExist;
 
-        private int _width;
-        private int _height;
+        private bool _isPointExist = false;
 
-        private Position minPos;
-        private Position maxPos;
+        private Position mapSize;
 
         private TimeSpan _roundTime;
 
@@ -47,23 +41,34 @@ namespace SnakeGame
 
         public void StartSprint() 
         {
+            DateTime start = DateTime.Now;
+
+            SpawnPoint();
             while (_snake.IsAlive)
             {
                 _snake.Move();
                 CheckCollision();
-                MapUpData?.Invoke(_point, maxPos);
+                if (!_isPointExist)
+                {
+                    SpawnPoint();
+                }
+                MapUpData?.Invoke(_point, mapSize);
                 SnakeUpData?.Invoke(_snake.BodyList);
                 Thread.Sleep(SLEEP);
             }
+            DateTime end = DateTime.Now;
+
+            _roundTime = end - start;
         }
+
+        private static readonly Random random = new();
 
         private void SpawnPoint() 
         {
             if (_isPointExist == false)
             {
-                Random random = new();
-                int posX = random.Next(1, _width - 1);
-                int posY = random.Next(1, _height - 1);
+                int posX = random.Next(1, mapSize.PosX - 1);
+                int posY = random.Next(1, mapSize.PosY - 1);
 
                 _point = new(new Position(posX, posY));
                 _isPointExist = true;
@@ -75,8 +80,6 @@ namespace SnakeGame
             if (_snake.HeadPosition == _point.Position)
             {
                 _snake.Eat();
-                SpawnPoint();
-                MapUpData?.Invoke(_point, maxPos);
                 _isPointExist = false;
             }
         }

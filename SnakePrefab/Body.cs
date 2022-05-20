@@ -8,7 +8,7 @@ namespace SnakeGame.SnakePrefab
 {
     internal class Body : Segment
     {
-        public Body(Position position) : base(position, 'O')
+        public Body(Position position) : base(position, "██")
         {
 
         }

@@ -10,17 +10,18 @@ namespace SnakeGame.SnakePrefab
     internal class Head : Segment
     {
 
-        public Head(Position position, Snake snake) : base(position, '@')
+        public Head(Position position, Snake snake) : base(position, "██")
         {
             _moveController = new();
-            _HeadCrash += snake.Die;
+            HeadCrash += snake.Die;
+            _childSegment = new Body(new Position(position));
         }
 
-        private event Action _HeadCrash;
+        private event Action HeadCrash;
 
         private Direction _blockedDirrection = new LeftWard();
 
-        private DirectionController _moveController;
+        private readonly DirectionController _moveController;
         public DirectionController MoveController
         {
             get { return _moveController; }
@@ -42,7 +43,7 @@ namespace SnakeGame.SnakePrefab
             if (_childSegment != null)
             {
                 bool isCrash = _childSegment.CheckHeadCrashed(Position);
-                if (isCrash) _HeadCrash?.Invoke();
+                if (isCrash) HeadCrash?.Invoke();
             }
         }
     }

@@ -10,7 +10,7 @@ namespace SnakeGame.SnakePrefab
 {
     internal abstract class Segment
     {
-        public Segment(Position position, char view)
+        public Segment(Position position, string view)
         {
             _view = view;
             _position = position;
@@ -76,10 +76,10 @@ namespace SnakeGame.SnakePrefab
             return segmentList;
         }
 
-        private readonly char _view;
+        private readonly string _view;
         public override string ToString()
         {
-            return _view.ToString();
+            return _view;
         }
 
     }
