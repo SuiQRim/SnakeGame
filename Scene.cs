@@ -103,8 +103,9 @@ namespace SnakeGame
 
             while (_snake.IsAlive) 
             {
-                second++;
+                
                 TimeUpData?.Invoke(new TimeSpan(second * 10000000));
+                second++;
                 Thread.Sleep(1000);
             }
         }
