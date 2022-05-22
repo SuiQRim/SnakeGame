@@ -5,11 +5,11 @@ namespace SnakeGame.Menu.MenuItems
 {
     internal class Start : MenuElement
     {
-        public Start() : base ("Начать")  { 
-        }
+        public Start() : base ("Старт")  { }
+
         public override void Do()
         {
-            Scene scene = new(15, 15, new Snake(new DefaultSkin(), 15, 15));
+            Scene scene = new(15, 15, new Snake( 15, 15));
             scene.StartSprint();
         }
     }

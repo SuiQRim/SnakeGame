@@ -6,7 +6,7 @@ namespace SnakeGame.Menu
 {
     internal class MainMenu
     {
-        private const int LEFTMARGIN = 5;
+        private const int LEFTMARGIN = 10;
         private const int TOPMARGIN = 5;
         public MainMenu()
         {
@@ -43,19 +43,17 @@ namespace SnakeGame.Menu
 
         public void ChangeSelectedMenuItem(Direction direction) 
         {
-            switch (direction) 
+            switch (direction)
             {
                 case UpWard:
 
-                    if (_index - 1 < 0)
-                    {
+                    if (_index - 1 < 0) 
+                    { 
                         _index = _menuElements.Count - 1;
                     }
-                    else
-                    {
-                        _index--;
-                    }
-                    
+
+                    else _index--; 
+
                     break;
 
                 case DownWard:
@@ -64,10 +62,8 @@ namespace SnakeGame.Menu
                     {
                         _index = 0;
                     }
-                    else
-                    {
-                        _index++;
-                    }
+                    else  _index++;
+
                     break;
             }
 

@@ -171,7 +171,7 @@ namespace SnakeGame
 
             foreach (var menuElement in menuElements)
             {
-                Console.SetCursorPosition(leftMargin + menuElement.Length - menuElement.CenterLength, topMargin + margin);
+                Console.SetCursorPosition(leftMargin + MenuElement.MENUITEMMAXLENGTH - menuElement.CenterLength, topMargin + margin);
                 margin += 2;
                 Console.Write(menuElement);
 
@@ -183,7 +183,7 @@ namespace SnakeGame
 
             Console.ForegroundColor = ConsoleColor.Green;
             int margin = 2 * index;
-            Console.SetCursorPosition(leftMargin + menuElements[index].Length - menuElements[index].CenterLength, topMargin + margin);
+            Console.SetCursorPosition(leftMargin + MenuElement.MENUITEMMAXLENGTH - menuElements[index].CenterLength, topMargin + margin);
             Console.Write(menuElements[index]);
 
             

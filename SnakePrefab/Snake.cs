@@ -6,7 +6,7 @@ namespace SnakeGame
     internal class Snake
     {
 
-        public Snake(Skin skin, int headPosX, int headPosY)
+        public Snake(int headPosX, int headPosY)
         {
             
             _isAlive = true;
