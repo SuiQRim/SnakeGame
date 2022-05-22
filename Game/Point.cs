@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SnakeGame.SnakePrefab;
-namespace SnakeGame
+namespace SnakeGame.Game
 {
     internal class Point
     {

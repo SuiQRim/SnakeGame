@@ -1,4 +1,4 @@
-﻿namespace SnakeGame.Skins
+﻿namespace SnakeGame.SnakePrefab
 {
     internal class DefaultSkin : Skin
     {

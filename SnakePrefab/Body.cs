@@ -1,4 +1,6 @@
-﻿namespace SnakeGame.SnakePrefab
+﻿using SnakeGame.Game;
+
+namespace SnakeGame.SnakePrefab
 {
     internal class Body : Segment
     {

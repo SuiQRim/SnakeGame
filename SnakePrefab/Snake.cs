@@ -1,5 +1,5 @@
 ﻿using SnakeGame.SnakePrefab;
-
+using SnakeGame.Game;
 
 namespace SnakeGame
 {

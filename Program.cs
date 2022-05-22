@@ -1,10 +1,9 @@
-﻿using SnakeGame;
-using SnakeGame.Skins;
+﻿using SnakeGame.Menu;
 
 Console.SetWindowSize(50,25);
 Console.CursorVisible = false;
 Console.Title = "Змейка";
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-Menu menu = new Menu();
+MainMenu menu = new MainMenu();
 

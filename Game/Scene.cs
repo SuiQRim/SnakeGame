@@ -1,6 +1,6 @@
 ﻿using SnakeGame.SnakePrefab;
 
-namespace SnakeGame
+namespace SnakeGame.Game
 {
     internal class Scene
     {

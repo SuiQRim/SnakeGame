@@ -1,4 +1,4 @@
-﻿namespace SnakeGame
+﻿namespace SnakeGame.Game
 {
     internal class Position
     {

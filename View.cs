@@ -1,4 +1,6 @@
 ﻿using SnakeGame.SnakePrefab;
+using SnakeGame.Menu.MenuItems;
+using SnakeGame.Game;
 
 namespace SnakeGame
 {
@@ -162,27 +164,27 @@ namespace SnakeGame
             }
         }
 
-        public static void WriteAllMenuElement(int leftMargin, int topMargin, int menuMaxItemLength, List<string> menuElements)
+        public static void WriteAllMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements)
         {
             Console.ForegroundColor = ConsoleColor.White;
             int margin = 0;
 
             foreach (var menuElement in menuElements)
             {
-                Console.SetCursorPosition(leftMargin + menuMaxItemLength - (menuElement.Length / 2), topMargin + margin);
+                Console.SetCursorPosition(leftMargin + menuElement.Length - menuElement.CenterLength, topMargin + margin);
                 margin += 2;
                 Console.Write(menuElement);
 
             }
         }
-        public static void WriteSelectedMenuElement(int leftMargin, int topMargin, int menuMaxItemLength, List<string> menuElements, string menuElement, int index)
+        public static void WriteSelectedMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements, int index)
         {
-            WriteAllMenuElement(leftMargin, topMargin, menuMaxItemLength, menuElements);
+            WriteAllMenuElement(leftMargin, topMargin, menuElements);
 
             Console.ForegroundColor = ConsoleColor.Green;
             int margin = 2 * index;
-            Console.SetCursorPosition(leftMargin + menuMaxItemLength - (menuElement.Length / 2), topMargin + margin);
-            Console.Write(menuElement);
+            Console.SetCursorPosition(leftMargin + menuElements[index].Length - menuElements[index].CenterLength, topMargin + margin);
+            Console.Write(menuElements[index]);
 
             
         }
