@@ -6,21 +6,17 @@ namespace SnakeGame
     {
         private const int SLEEP = 150;
 
-        public Scene(int width, int heigh, Snake snake, View view)
+        public Scene(int width, int heigh, Snake snake)
         {
             _snake = snake;
-
             _mapSize = new Position(width, heigh);
 
-            view.WriteScoreBorder();
-            view.WriteTimeBorder();
-            MapUpData += view.WriteMap;
-            SnakeUpData += view.WriteSnake;
-            TimeUpData += view.UpDataLifeTime;
-            ChangeScore += view.UpDataScore;
+            View.StartConfigurate();
 
-            StartSprint();
-            MapUpData?.Invoke(_point, _mapSize);
+            MapUpData += View.WriteMap;
+            SnakeUpData += View.WriteSnake;
+            TimeUpData += View.UpDataLifeTime;
+            ChangeScore += View.UpDataScore;
         }
 
         private Snake _snake;
@@ -40,11 +36,10 @@ namespace SnakeGame
         private event Action<List<Segment>> SnakeUpData;
         private event Action<int> ChangeScore;
 
-        private void StartSprint() 
+        public void StartSprint() 
         {
             DateTime start = DateTime.Now;
             new Thread(() => TimeStep()).Start();
-
             SpawnPoint();
 
             while (_snake.IsAlive)
@@ -61,11 +56,17 @@ namespace SnakeGame
                 
                 Thread.Sleep(SLEEP);
             }
+
             DateTime end = DateTime.Now;
 
-            _roundTime = end - start;
+            GameOver(start, end);
         }
 
+        private void GameOver(DateTime start, DateTime end) 
+        {
+            MapUpData?.Invoke(_point, _mapSize);
+            _roundTime = end - start;
+        }
         private void SpawnPoint() 
         {
             if (_isPointExist == false)

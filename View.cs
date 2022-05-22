@@ -2,9 +2,8 @@
 
 namespace SnakeGame
 {
-    internal class View
+    internal static class View
     {
-
         private const int MAP_TOP_MARGIN = 5;
         private const int MAP_LEFT_MARGIN = 10;
 
@@ -25,9 +24,16 @@ namespace SnakeGame
         private const string HORIZONTALBORDER = "██";
         private const string POINT = "██";
 
-        private object cursor = new();
+        private static object cursor = new();
 
-        public void WriteScoreBorder() 
+        public static void StartConfigurate() 
+        {
+            Console.Clear();
+            WriteScoreBorder();
+            WriteTimeBorder();
+        }
+
+        private static void WriteScoreBorder() 
         {
             Console.ForegroundColor = ConsoleColor.White;
 
@@ -51,7 +57,7 @@ namespace SnakeGame
 
         }
 
-        public void WriteTimeBorder() 
+        private static void  WriteTimeBorder() 
         {
             Console.ForegroundColor = ConsoleColor.White;
 
@@ -76,7 +82,7 @@ namespace SnakeGame
 
         }
 
-        public void UpDataScore(int score) 
+        public static void UpDataScore(int score) 
         {
             lock (cursor) 
             {
@@ -86,7 +92,7 @@ namespace SnakeGame
             }
         }
 
-        public void UpDataLifeTime(TimeSpan timeSpan) 
+        public static void UpDataLifeTime(TimeSpan timeSpan) 
         {
             lock (cursor)
             {
@@ -98,7 +104,7 @@ namespace SnakeGame
             }
         }
 
-        public void WriteMap(Point point, Position mapSize)
+        public static void WriteMap(Point point, Position mapSize)
         {
             lock (cursor)
             {
@@ -132,7 +138,7 @@ namespace SnakeGame
 
  
 
-        public void WriteSnake(List<Segment> bodyList)
+        public static void WriteSnake(List<Segment> bodyList)
         {
             lock (cursor)
             {
@@ -154,6 +160,31 @@ namespace SnakeGame
                     Console.Write(segment);
                 }
             }
+        }
+
+        public static void WriteAllMenuElement(int leftMargin, int topMargin, int menuMaxItemLength, List<string> menuElements)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            int margin = 0;
+
+            foreach (var menuElement in menuElements)
+            {
+                Console.SetCursorPosition(leftMargin + menuMaxItemLength - (menuElement.Length / 2), topMargin + margin);
+                margin += 2;
+                Console.Write(menuElement);
+
+            }
+        }
+        public static void WriteSelectedMenuElement(int leftMargin, int topMargin, int menuMaxItemLength, List<string> menuElements, string menuElement, int index)
+        {
+            WriteAllMenuElement(leftMargin, topMargin, menuMaxItemLength, menuElements);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            int margin = 2 * index;
+            Console.SetCursorPosition(leftMargin + menuMaxItemLength - (menuElement.Length / 2), topMargin + margin);
+            Console.Write(menuElement);
+
+            
         }
 
     }

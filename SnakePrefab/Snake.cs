@@ -42,7 +42,11 @@ namespace SnakeGame
 
         private bool _isAlive;
 
-        public void Die() { _isAlive = false; }
+        public void Die() 
+        { 
+            _isAlive = false;
+            _head.MoveController.StopReadKey();
+        }
         public bool IsAlive
         {
             get => _isAlive;

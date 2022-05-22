@@ -5,45 +5,28 @@ using SnakeGame.Orintation;
 
 namespace SnakeGame
 {
-    internal class DirectionController
+    internal class DirectionController : KeyController
     {
-        public DirectionController()
+        public DirectionController() : base()
         {
-            new Thread(() => ReadAllKey()).Start();
+            Direction = new RightWard();
         }
 
-        private Direction _direction = new RightWard();
-        public Direction Direction 
-        { 
-            get => _direction;
-            set => _direction = value;
-        }
-
-        public void ReadAllKey()
-        {
-            while (true)
-            {
-                ConsoleKey key = Console.ReadKey().Key;
-                DetermineDirection(key);
-            }
-
-        }
-
-        private void DetermineDirection(ConsoleKey key) 
+        protected override void DetermineDirection(ConsoleKey key) 
         {
             switch (key) 
             {
                 case ConsoleKey.UpArrow:
-                    _direction = new UpWard();
+                    Direction = new UpWard();
                     break;
                 case ConsoleKey.DownArrow:
-                    _direction = new DownWard();
+                    Direction = new DownWard();
                     break;
                 case ConsoleKey.RightArrow:
-                    _direction = new RightWard();
+                    Direction = new RightWard();
                     break;
                 case ConsoleKey.LeftArrow:
-                    _direction = new LeftWard();
+                    Direction = new LeftWard();
                     break;
             }
         }
