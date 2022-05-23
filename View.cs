@@ -1,5 +1,5 @@
 ﻿using SnakeGame.SnakePrefab;
-using SnakeGame.Menu.MenuItems;
+using SnakeGame.MenuPrefab.MenuItems;
 using SnakeGame.Game;
 
 namespace SnakeGame
@@ -57,6 +57,7 @@ namespace SnakeGame
             Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN + 1);
             Console.WriteLine(text);
 
+            Console.ForegroundColor = ConsoleColor.Black;
         }
 
         private static void  WriteTimeBorder() 
@@ -82,6 +83,8 @@ namespace SnakeGame
             Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN + 1);
             Console.WriteLine(text);
 
+            Console.ForegroundColor = ConsoleColor.Black;
+
         }
 
         public static void UpDataScore(int score) 
@@ -91,18 +94,21 @@ namespace SnakeGame
                 Console.ForegroundColor= ConsoleColor.Green;
                 Console.SetCursorPosition(SCORE_LEFT_MARGIN + LEFT_PADDING, SCORE_TOP_MARGIN);
                 Console.WriteLine($"{score,SCORE_VALUEMAXLENGTH - 1}");
+                Console.ForegroundColor = ConsoleColor.Black;
             }
+
         }
 
         public static void UpDataLifeTime(TimeSpan timeSpan) 
         {
             lock (cursor)
             {
-             
-
+            
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition( TIME_LEFT_MARGIN + LEFT_PADDING, TIME_TOP_MARGIN);
                 Console.WriteLine(timeSpan);
+
+                Console.ForegroundColor = ConsoleColor.Black;
             }
         }
 
@@ -135,6 +141,8 @@ namespace SnakeGame
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(MAP_LEFT_MARGIN + (point.Position.PosX * 2), MAP_TOP_MARGIN + point.Position.PosY + 1);
                 Console.Write($"{POINT}");
+
+                Console.ForegroundColor = ConsoleColor.Black;
             }
         }
 
@@ -161,6 +169,8 @@ namespace SnakeGame
                     Console.SetCursorPosition(MAP_LEFT_MARGIN + (segment.Position.PosX * 2), MAP_TOP_MARGIN + segment.Position.PosY + 1);
                     Console.Write(segment);
                 }
+
+                Console.ForegroundColor = ConsoleColor.Black;
             }
         }
 
@@ -176,7 +186,9 @@ namespace SnakeGame
                 Console.Write(menuElement);
 
             }
+            Console.ForegroundColor = ConsoleColor.Black;
         }
+
         public static void WriteSelectedMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements, int index)
         {
             WriteAllMenuElement(leftMargin, topMargin, menuElements);
@@ -186,7 +198,7 @@ namespace SnakeGame
             Console.SetCursorPosition(leftMargin + MenuElement.MENUITEMMAXLENGTH - menuElements[index].CenterLength, topMargin + margin);
             Console.Write(menuElements[index]);
 
-            
+            Console.ForegroundColor = ConsoleColor.Black;
         }
 
     }

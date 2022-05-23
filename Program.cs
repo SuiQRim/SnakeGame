@@ -1,4 +1,4 @@
-﻿using SnakeGame.Menu;
+﻿using SnakeGame.MenuPrefab;
 
 Console.SetWindowSize(50,25);
 Console.CursorVisible = false;

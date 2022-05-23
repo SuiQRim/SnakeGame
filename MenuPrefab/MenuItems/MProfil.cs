@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeGame.Menu.MenuItems
+namespace SnakeGame.MenuPrefab.MenuItems
 {
-    internal class Exit : MenuElement
+    internal class MProfil : MenuElement
     {
-        public Exit() : base ("Выйти") { }
+        public MProfil() : base ("Профиль")
+        {
+
+        }
 
         public override void Do()
         {
-            Environment.Exit(0);
+
         }
     }
 }

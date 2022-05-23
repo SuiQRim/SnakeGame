@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using SnakeGame.Orintation;
 
-namespace SnakeGame.Menu
+namespace SnakeGame.MenuPrefab
 {
-    internal class MenuController : KeyController
+    internal class MenuKeyController : KeyController
     {
-        public MenuController(MainMenu menu) : base()
+        public MenuKeyController(Menu menu) : base()
         {
             ChangeDirection += menu.ChangeSelectedMenuItem;
             PressEnter += menu.EnterMenuElement;

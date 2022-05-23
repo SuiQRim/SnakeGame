@@ -1,4 +1,4 @@
-﻿namespace SnakeGame.Menu.MenuItems
+﻿namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal abstract class MenuElement
     {

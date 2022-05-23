@@ -1,7 +1,7 @@
 ﻿using SnakeGame.SnakePrefab;
 using SnakeGame.Game;
 
-namespace SnakeGame.Menu.MenuItems
+namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class Start : MenuElement
     {
