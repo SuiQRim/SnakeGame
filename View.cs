@@ -174,8 +174,10 @@ namespace SnakeGame
             }
         }
 
-        public static void WriteAllMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements)
+        private static void WriteAllMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements, bool needToClear)
         {
+            if (needToClear) Console.Clear();
+
             Console.ForegroundColor = ConsoleColor.White;
             int margin = 0;
 
@@ -189,9 +191,9 @@ namespace SnakeGame
             Console.ForegroundColor = ConsoleColor.Black;
         }
 
-        public static void WriteSelectedMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements, int index)
+        public static void WriteSelectedMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements, int index, bool needToClear)
         {
-            WriteAllMenuElement(leftMargin, topMargin, menuElements);
+            WriteAllMenuElement(leftMargin, topMargin, menuElements, needToClear);
 
             Console.ForegroundColor = ConsoleColor.Green;
             int margin = 2 * index;

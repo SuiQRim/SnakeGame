@@ -66,6 +66,7 @@ namespace SnakeGame.Game
         {
             MapUpData?.Invoke(_point, _mapSize);
             _roundTime = end - start;
+           
         }
         private void SpawnPoint() 
         {

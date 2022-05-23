@@ -15,7 +15,6 @@ namespace SnakeGame.MenuPrefab
             PressEnter += menu.EnterMenuElement;
         }
 
-        
         private event Action<Direction> ChangeDirection;
 
         private event Action PressEnter;

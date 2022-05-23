@@ -19,7 +19,7 @@
             get => _name.Length / 2;
         } 
 
-        public abstract void Do();
+        public abstract Menu Do();
         public override string ToString() => _name;
 
     }

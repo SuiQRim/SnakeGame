@@ -13,19 +13,24 @@ namespace SnakeGame.MenuPrefab
         private const int LEFTMARGIN = 10;
         private const int TOPMARGIN = 5;
 
+        protected static object isMenuUsing = new ();
+
         public Menu()
         {
-            WriteMenuElements += View.WriteAllMenuElement;
             ChangeSelectedMenuElement += View.WriteSelectedMenuElement;
-
-            _directionController = new(this);
         }
 
-        protected event Action<int, int, List<MenuElement>> WriteMenuElements;
+        public void Start() 
+        {
+            _index = 0;
+            _directionController = new(this);
+            ChangeSelectedMenuElement += View.WriteSelectedMenuElement;
+            WriteMenu();
+        }
 
-        protected event Action<int, int, List<MenuElement>, int> ChangeSelectedMenuElement;
+        protected event Action<int, int, List<MenuElement>, int, bool> ChangeSelectedMenuElement;
 
-        protected readonly MenuKeyController _directionController;
+        protected MenuKeyController _directionController;
 
         protected int _index = 0;
 
@@ -33,19 +38,45 @@ namespace SnakeGame.MenuPrefab
 
         protected void WriteMenu() 
         {
-            WriteMenuElements?.Invoke(LEFTMARGIN, TOPMARGIN, _menuElements);
-            ChangeSelectedMenuElement?.Invoke(LEFTMARGIN, TOPMARGIN, _menuElements, _index);
+            ChangeSelectedMenuElement?.Invoke(LEFTMARGIN, TOPMARGIN, _menuElements, _index, true);
         } 
 
         public void EnterMenuElement()
         {
             _directionController.StopReadKey();
-            _menuElements[_index].Do();
+            Menu menu = _menuElements[_index].Do();
+
+            menu.Start();
+
         }
 
-        public virtual void ChangeSelectedMenuItem(Direction direction) 
+        public void ChangeSelectedMenuItem(Direction direction) 
         {
-            ChangeSelectedMenuElement?.Invoke(LEFTMARGIN, TOPMARGIN, _menuElements, _index);
+            switch (direction)
+            {
+                case UpWard:
+
+                    if (_index - 1 < 0)
+                    {
+                        _index = _menuElements.Count - 1;
+                    }
+
+                    else _index--;
+
+                    break;
+
+                case DownWard:
+
+                    if (_index + 1 > _menuElements.Count - 1)
+                    {
+                        _index = 0;
+                    }
+                    else _index++;
+
+                    break;
+            }
+
+            ChangeSelectedMenuElement?.Invoke(LEFTMARGIN, TOPMARGIN, _menuElements, _index, false);
         }
     }
 }

@@ -10,9 +10,9 @@ namespace SnakeGame.MenuPrefab.MenuItems
     {
         public Exit() : base ("Выйти") { }
 
-        public override void Do()
+        public override Menu Do()
         {
-            Environment.Exit(0);
+            return new MainMenu();
         }
     }
 }
