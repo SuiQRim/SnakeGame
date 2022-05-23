@@ -15,7 +15,6 @@ namespace SnakeGame.MenuPrefab.MenuItems
         }
         public override Menu Do()
         {
-            // Задумано так, что программа сама придет к главному меню
             return new MainMenu();
         }
     }

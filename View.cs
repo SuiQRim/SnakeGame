@@ -30,9 +30,17 @@ namespace SnakeGame
 
         public static void StartConfigurate() 
         {
-            Console.Clear();
             WriteScoreBorder();
             WriteTimeBorder();
+        }
+
+        public static void WriteUnderMapWithSleep(string text, Position position)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(Console.WindowWidth / 2 -  text.Length / 2, position.PosY / 2 + (MAP_TOP_MARGIN));
+            Console.WriteLine(text);
+            Console.ReadKey();
+            Console.Clear();
         }
 
         private static void WriteScoreBorder() 

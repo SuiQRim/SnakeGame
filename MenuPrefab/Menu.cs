@@ -32,7 +32,7 @@ namespace SnakeGame.MenuPrefab
 
         protected MenuKeyController _directionController;
 
-        protected int _index = 0;
+        protected int _index;
 
         protected List<MenuElement> _menuElements;
 
@@ -43,11 +43,9 @@ namespace SnakeGame.MenuPrefab
 
         public void EnterMenuElement()
         {
+            Console.Clear();
             _directionController.StopReadKey();
-            Menu menu = _menuElements[_index].Do();
-
-            menu.Start();
-
+            _menuElements[_index].Do().Start();
         }
 
         public void ChangeSelectedMenuItem(Direction direction) 

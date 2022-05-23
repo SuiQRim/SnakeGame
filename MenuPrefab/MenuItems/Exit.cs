@@ -12,7 +12,8 @@ namespace SnakeGame.MenuPrefab.MenuItems
 
         public override Menu Do()
         {
-            return new MainMenu();
+            Environment.Exit(0);
+            return null;
         }
     }
 }

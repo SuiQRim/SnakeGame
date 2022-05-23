@@ -11,8 +11,6 @@ namespace SnakeGame.Game
             _snake = snake;
             _mapSize = new Position(width, heigh);
 
-            View.StartConfigurate();
-
             MapUpData += View.WriteMap;
             SnakeUpData += View.WriteSnake;
             TimeUpData += View.UpDataLifeTime;
@@ -30,17 +28,26 @@ namespace SnakeGame.Game
         private TimeSpan _roundTime;
 
         private event Action<Point, Position> MapUpData;
-
-        private event Action<TimeSpan> TimeUpData;
-
         private event Action<List<Segment>> SnakeUpData;
+        private event Action<TimeSpan> TimeUpData;
         private event Action<int> ChangeScore;
 
-        public void StartSprint() 
+        public void Start() 
         {
-            DateTime start = DateTime.Now;
-            new Thread(() => TimeStep()).Start();
             SpawnPoint();
+            MapUpData?.Invoke(_point, _mapSize);
+            SnakeUpData?.Invoke(_snake.BodyList);
+
+            View.WriteUnderMapWithSleep("Нажмите чтобы начать", _mapSize);
+            View.StartConfigurate();
+            Sprint();
+        }
+
+        private void Sprint() 
+        {
+            new Thread(() => TimeStep()).Start();
+            DateTime start = DateTime.Now;
+            MapUpData?.Invoke(_point, _mapSize);
 
             while (_snake.IsAlive)
             {
@@ -51,7 +58,6 @@ namespace SnakeGame.Game
                     SpawnPoint();
                 }
                  
-                MapUpData?.Invoke(_point, _mapSize);
                 SnakeUpData?.Invoke(_snake.BodyList);
                 
                 Thread.Sleep(SLEEP);
@@ -65,9 +71,12 @@ namespace SnakeGame.Game
         private void GameOver(DateTime start, DateTime end) 
         {
             MapUpData?.Invoke(_point, _mapSize);
+
             _roundTime = end - start;
-           
+
+            View.WriteUnderMapWithSleep("Игра окончена...", _mapSize);
         }
+
         private void SpawnPoint() 
         {
             if (_isPointExist == false)
@@ -75,6 +84,7 @@ namespace SnakeGame.Game
                 Position pos = Point.SearchClearPosition(_snake.BodyList, _mapSize);
 
                 _point = new(new Position(pos));
+                MapUpData?.Invoke(_point, _mapSize);
                 _isPointExist = true;
             }
         }
@@ -86,6 +96,7 @@ namespace SnakeGame.Game
             {
                 _snake.Eat();
                 ChangeScore?.Invoke(++_score);
+                
                 _isPointExist = false;
             }
         }
