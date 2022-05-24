@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
-    internal class MProfil : MenuElement
+    internal class PlayerProfil : AMenuElement
     {
-        public MProfil() : base ("Профиль")
+        public PlayerProfil() : base ("Профиль")
         {
 
         }

@@ -1,4 +1,4 @@
-﻿using SnakeGame.Orintation;
+﻿using SnakeGame.Binding;
 using SnakeGame.Game;
 
 namespace SnakeGame.SnakePrefab

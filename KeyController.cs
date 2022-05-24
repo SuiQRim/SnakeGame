@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SnakeGame.Binding;
 
 namespace SnakeGame
 {
@@ -12,7 +8,8 @@ namespace SnakeGame
         {
             new Thread(() => ReadAllKey()).Start();
         }
-        
+
+
         private Direction _direction;
         public Direction Direction
         {

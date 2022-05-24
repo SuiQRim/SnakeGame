@@ -3,7 +3,7 @@ using SnakeGame.Game;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
-    internal class Start : MenuElement
+    internal class Start : AMenuElement
     {
         public Start() : base ("Старт")  { }
 

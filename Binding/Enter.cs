@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeGame.Orintation
+namespace SnakeGame.Binding
 {
     internal class Enter : Direction
     {
-        public Enter() : base("Принять", ConsoleKey.Enter)
+        public Enter() : base("Принять")
         {
-
+            keyValues = new List<ConsoleKey>()
+            {
+                ConsoleKey.Enter
+            };
         }
         public override string Print()
         {

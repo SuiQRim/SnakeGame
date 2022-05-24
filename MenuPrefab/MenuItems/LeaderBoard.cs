@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
-    internal class LeaderBoard : MenuElement
+    internal class LeaderBoard : AMenuElement
     {
         public LeaderBoard() : base ("Таблица лидеров")
         {

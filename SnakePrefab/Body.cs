@@ -1,4 +1,5 @@
 ﻿using SnakeGame.Game;
+using SnakeGame.Binding;
 
 namespace SnakeGame.SnakePrefab
 {

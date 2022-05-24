@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SnakeGame.Game;
+
 namespace SnakeGame.MenuPrefab.MenuItems
 {
-    internal class RestartGame : MenuElement
+    internal class RestartGame : AMenuElement
     {
         public RestartGame() : base("Играть снова")
         {

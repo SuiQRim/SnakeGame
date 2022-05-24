@@ -7,7 +7,7 @@ using SnakeGame.MenuPrefab;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
-    internal class LeaveToMainMenu : MenuElement
+    internal class LeaveToMainMenu : AMenuElement
     {
         public LeaveToMainMenu() : base ("Выйти в главное меню")
         {

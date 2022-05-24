@@ -1,4 +1,4 @@
-﻿using SnakeGame.Orintation;
+﻿using SnakeGame.Binding;
 using SnakeGame.Game;
 using SnakeGame.MenuPrefab.MenuItems;
 
@@ -12,7 +12,7 @@ namespace SnakeGame.MenuPrefab
             {
                 new Start(),
                 new LeaderBoard(),
-                new MProfil(),
+                new PlayerProfil(),
                 new Exit()
             };
            

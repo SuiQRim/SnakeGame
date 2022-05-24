@@ -23,7 +23,7 @@ namespace SnakeGame
         {
             _head.Move();
         }
-        public void TouchintWall()
+        public void TouchingWall()
         {
             Die();
         }

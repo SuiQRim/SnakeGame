@@ -1,20 +1,22 @@
-﻿using SnakeGame.Orintation;
+﻿using SnakeGame.Binding;
 
-namespace SnakeGame
+namespace SnakeGame.Binding
 {
     internal abstract class Direction
     {
-        public Direction(string orintation, ConsoleKey key) 
+        public Direction(string orintation) 
         { 
             OrintationName = orintation;
-            HotKey = key;
+        }
+
+        protected List<ConsoleKey> keyValues;
+        public List<ConsoleKey> KeyValues 
+        { 
+            get => keyValues;
+            set => keyValues = value;
         }
 
         public string OrintationName { get; set; }
-        private ConsoleKey HotKey { get; set; }
-
-        const char active = '▓';
-        const char notActive= '░';
 
         public static Direction GetReverseOrintation(Direction direction) 
         {

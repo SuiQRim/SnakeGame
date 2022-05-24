@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SnakeGame.Orintation;
+using SnakeGame.Binding;
 using SnakeGame.MenuPrefab.MenuItems;
 
 namespace SnakeGame.MenuPrefab
@@ -28,13 +28,13 @@ namespace SnakeGame.MenuPrefab
             WriteMenu();
         }
 
-        protected event Action<int, int, List<MenuElement>, int, bool> ChangeSelectedMenuElement;
+        protected event Action<int, int, List<AMenuElement>, int, bool> ChangeSelectedMenuElement;
 
         protected MenuKeyController _directionController;
 
         protected int _index;
 
-        protected List<MenuElement> _menuElements;
+        protected List<AMenuElement> _menuElements;
 
         protected void WriteMenu() 
         {
@@ -72,6 +72,10 @@ namespace SnakeGame.MenuPrefab
                     else _index++;
 
                     break;
+
+                case Enter:
+                    EnterMenuElement();
+                    return;
             }
 
             ChangeSelectedMenuElement?.Invoke(LEFTMARGIN, TOPMARGIN, _menuElements, _index, false);

@@ -105,7 +105,7 @@ namespace SnakeGame.Game
         {
             if (headPos.PosX == -1 || headPos.PosX == _mapSize.PosX || headPos.PosY == -1 || headPos.PosY == _mapSize.PosY - 1)
             {
-                _snake.TouchintWall();
+                _snake.TouchingWall();
             }
 
         }

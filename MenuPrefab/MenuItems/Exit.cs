@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
-    internal class Exit : MenuElement
+    internal class Exit : AMenuElement
     {
         public Exit() : base ("Выйти") { }
 

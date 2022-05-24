@@ -22,9 +22,7 @@ namespace SnakeGame
 
         private const string UIHORIZONTALBORDER = "——";
         private const string UIVERTICALBORDER = "||";
-        private const string VERTICALBORDER = "██";
-        private const string HORIZONTALBORDER = "██";
-        private const string POINT = "██";
+        private const string PIXEL = "██";
 
         private static object cursor = new();
 
@@ -128,7 +126,7 @@ namespace SnakeGame
                 string text = "";
                 for (int i = 0; i < mapSize.PosX * 2; i += 2)
                 {
-                    text += $"{HORIZONTALBORDER}";
+                    text += $"{PIXEL}";
                 }
 
                 Console.SetCursorPosition(MAP_LEFT_MARGIN, MAP_TOP_MARGIN);
@@ -141,14 +139,14 @@ namespace SnakeGame
                 for (int i = 0; i < mapSize.PosX + 1; i++)
                 {
                     Console.SetCursorPosition(MAP_LEFT_MARGIN - LEFT_PADDING, MAP_TOP_MARGIN + i);
-                    Console.Write($"{VERTICALBORDER}");
+                    Console.Write($"{PIXEL}");
                     Console.SetCursorPosition(MAP_LEFT_MARGIN + LEFT_PADDING + (mapSize.PosX * 2) - 2, MAP_TOP_MARGIN + i);
-                    Console.Write($"{VERTICALBORDER}");
+                    Console.Write($"{PIXEL}");
                 }
 
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(MAP_LEFT_MARGIN + (point.Position.PosX * 2), MAP_TOP_MARGIN + point.Position.PosY + 1);
-                Console.Write($"{POINT}");
+                Console.Write($"{PIXEL}");
 
                 Console.ForegroundColor = ConsoleColor.Black;
             }
@@ -182,7 +180,7 @@ namespace SnakeGame
             }
         }
 
-        private static void WriteAllMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements, bool needToClear)
+        private static void WriteAllMenuElement(int leftMargin, int topMargin, List<AMenuElement> menuElements, bool needToClear)
         {
             if (needToClear) Console.Clear();
 
@@ -191,7 +189,7 @@ namespace SnakeGame
 
             foreach (var menuElement in menuElements)
             {
-                Console.SetCursorPosition(leftMargin + MenuElement.MENUITEMMAXLENGTH - menuElement.CenterLength, topMargin + margin);
+                Console.SetCursorPosition(leftMargin + AMenuElement.MENUITEMMAXLENGTH - menuElement.CenterLength, topMargin + margin);
                 margin += 2;
                 Console.Write(menuElement);
 
@@ -199,13 +197,13 @@ namespace SnakeGame
             Console.ForegroundColor = ConsoleColor.Black;
         }
 
-        public static void WriteSelectedMenuElement(int leftMargin, int topMargin, List<MenuElement> menuElements, int index, bool needToClear)
+        public static void WriteSelectedMenuElement(int leftMargin, int topMargin, List<AMenuElement> menuElements, int index, bool needToClear)
         {
             WriteAllMenuElement(leftMargin, topMargin, menuElements, needToClear);
 
             Console.ForegroundColor = ConsoleColor.Green;
             int margin = 2 * index;
-            Console.SetCursorPosition(leftMargin + MenuElement.MENUITEMMAXLENGTH - menuElements[index].CenterLength, topMargin + margin);
+            Console.SetCursorPosition(leftMargin + AMenuElement.MENUITEMMAXLENGTH - menuElements[index].CenterLength, topMargin + margin);
             Console.Write(menuElements[index]);
 
             Console.ForegroundColor = ConsoleColor.Black;

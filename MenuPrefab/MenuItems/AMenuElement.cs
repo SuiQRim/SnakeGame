@@ -1,8 +1,8 @@
 ﻿namespace SnakeGame.MenuPrefab.MenuItems
 {
-    internal abstract class MenuElement
+    internal abstract class AMenuElement
     {
-        public MenuElement(string name)
+        public AMenuElement(string name)
         {
             _name = name;
         }
