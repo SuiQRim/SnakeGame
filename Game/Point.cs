@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SnakeGame.SnakePrefab;
+﻿using SnakeGame.SnakePrefab;
+
 namespace SnakeGame.Game
 {
     internal class Point

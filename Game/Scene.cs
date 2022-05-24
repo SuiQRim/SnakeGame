@@ -6,10 +6,11 @@ namespace SnakeGame.Game
     {
         private const int SLEEP = 150;
 
-        public Scene(int width, int heigh, Snake snake)
+        public Scene(int width, int heigh, Player player, Snake snake)
         {
             _snake = snake;
             _mapSize = new Position(width, heigh);
+            _player = player;
 
             MapUpData += View.WriteMap;
             SnakeUpData += View.WriteSnake;
@@ -17,6 +18,7 @@ namespace SnakeGame.Game
             ChangeScore += View.UpDataScore;
         }
 
+        private Player _player;
         private Snake _snake;
         private Point _point;
         private int _score;
@@ -25,7 +27,7 @@ namespace SnakeGame.Game
 
         private Position _mapSize;
 
-        private TimeSpan _roundTime;
+        public GameResult GameResult { get; private set; }
 
         private event Action<Point, Position> MapUpData;
         private event Action<List<Segment>> SnakeUpData;
@@ -72,7 +74,7 @@ namespace SnakeGame.Game
         {
             MapUpData?.Invoke(_point, _mapSize);
 
-            _roundTime = end - start;
+            GameResult = new GameResult(_score, end - start, _player.ComputerId);
 
             View.WriteUnderMapWithSleep("Игра окончена...", _mapSize);
         }

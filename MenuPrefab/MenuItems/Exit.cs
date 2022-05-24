@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SnakeGame.Game;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class Exit : AMenuElement
     {
-        public Exit() : base ("Выйти") { }
+        public Exit(Player player ) : base (player, "Выйти") { }
 
         public override Menu Do()
         {

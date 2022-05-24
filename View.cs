@@ -209,5 +209,10 @@ namespace SnakeGame
             Console.ForegroundColor = ConsoleColor.Black;
         }
 
+        public static void WriteGameResultTable() 
+        {
+        
+        }
+
     }
 }

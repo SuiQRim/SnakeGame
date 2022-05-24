@@ -20,15 +20,14 @@ namespace SnakeGame.Binding
 
         public static Direction GetReverseOrintation(Direction direction) 
         {
-            switch (direction) 
+            return direction switch
             {
-                case UpWard: return new DownWard();
-                case DownWard: return new UpWard();
-                case RightWard: return new LeftWard();
-                case LeftWard: return new RightWard();
-                default: throw new ArgumentNullException();
-            }
-             
+                UpWard => new DownWard(),
+                DownWard => new UpWard(),
+                RightWard => new LeftWard(),
+                LeftWard => new RightWard(),
+                _ => throw new ArgumentNullException(),
+            };
         }
         public abstract string Print();
     }

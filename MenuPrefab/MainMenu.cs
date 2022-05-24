@@ -6,17 +6,21 @@ namespace SnakeGame.MenuPrefab
 {
     internal class MainMenu : Menu
     {
-        public MainMenu() : base()
+        public MainMenu(Player player) : base(player)
         {
             _menuElements = new()
             {
-                new Start(),
-                new LeaderBoard(),
-                new PlayerProfil(),
-                new Exit()
+                new Start(player),
+                new LeaderBoard(player),
+                new PlayerProfil(player),
+                new Exit(player)
             };
+
+            _player = player;
            
         }
+
+        private Player _player;
 
     }
 }

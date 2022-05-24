@@ -5,21 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using SnakeGame.Binding;
 using SnakeGame.MenuPrefab.MenuItems;
-
+using SnakeGame.Game;
 namespace SnakeGame.MenuPrefab
 {
     internal abstract class Menu
     {
+
         private const int LEFTMARGIN = 10;
         private const int TOPMARGIN = 5;
 
         protected static object isMenuUsing = new ();
 
-        public Menu()
+        public Menu(Player player)
         {
+            _player = player;
             ChangeSelectedMenuElement += View.WriteSelectedMenuElement;
         }
 
+        protected Player _player;
         public void Start() 
         {
             _index = 0;
