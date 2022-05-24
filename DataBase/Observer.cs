@@ -32,7 +32,7 @@ namespace SnakeGame.DataBase
             {
                 gameResults = _snakeDB.GameResults.Where(r => r.ComputerId == p.ComputerId).ToList();
                 gameResults.Sort((r1 , r2 )=> r2.Score.CompareTo(r1.Score));
-                BestGameResults.Add(gameResults.First());
+                BestGameResults.Add(gameResults.FirstOrDefault());
             }
 
             return BestGameResults;

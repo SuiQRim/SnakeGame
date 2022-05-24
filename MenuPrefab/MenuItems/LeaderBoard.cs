@@ -30,10 +30,17 @@ namespace SnakeGame.MenuPrefab.MenuItems
         public static string CreateTable(List<Player> profils, List<GameResult> gameResults)
         {
             string text = "";
+            string nickName = "";
             Console.ForegroundColor = ConsoleColor.White;
             foreach (GameResult r in gameResults)
             {
-                text += $"|| {profils.Where(p => p.ComputerId == r.ComputerId).Single().NickName,16} {r.Score,4} {r.LifeTime,12} {r.TimeToCreate,12}\n";
+                if (r == null)
+                {
+                    text += $"|| {nickName,16}   Нет результатов\n";
+                    continue;
+                }
+                nickName = profils.Where(p => p.ComputerId == r.ComputerId).Single().NickName;
+                text += $"|| {nickName,16} {r.Score,4} {r.LifeTime,12} {r.TimeToCreate,12}\n";
             }
 
             Console.WriteLine(text);

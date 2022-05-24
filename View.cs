@@ -180,16 +180,16 @@ namespace SnakeGame
             }
         }
 
-        private static void WriteAllMenuElement(int leftMargin, int topMargin, List<AMenuElement> menuElements, bool needToClear)
+        private static void WriteAllMenuElement( List<AMenuElement> menuElements, bool needToClear)
         {
-            if (needToClear) Console.Clear();
 
             Console.ForegroundColor = ConsoleColor.White;
             int margin = 0;
 
             foreach (var menuElement in menuElements)
             {
-                Console.SetCursorPosition(leftMargin + AMenuElement.MENUITEMMAXLENGTH - menuElement.CenterLength, topMargin + margin);
+                Console.SetCursorPosition(Console.WindowWidth / 2 - menuElement.CenterLength, 
+                    Console.WindowHeight / 2  + margin);
                 margin += 2;
                 Console.Write(menuElement);
 
@@ -197,21 +197,30 @@ namespace SnakeGame
             Console.ForegroundColor = ConsoleColor.Black;
         }
 
-        public static void WriteSelectedMenuElement(int leftMargin, int topMargin, List<AMenuElement> menuElements, int index, bool needToClear)
+        public static void WriteMenuInfoWindow(List<string> text) 
         {
-            WriteAllMenuElement(leftMargin, topMargin, menuElements, needToClear);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            int margin = 2;
+            foreach (string item in text)
+            {
+                Console.SetCursorPosition(Console.WindowWidth / 2 - item.Length / 2, TOP_PADDING + margin);
+                margin += 2;
+                Console.Write(item);
+            }
+        }
+
+        public static void WriteSelectedMenuElement(List<AMenuElement> menuElements, int index, bool needToClear)
+        {
+            WriteAllMenuElement( menuElements, needToClear);
 
             Console.ForegroundColor = ConsoleColor.Green;
             int margin = 2 * index;
-            Console.SetCursorPosition(leftMargin + AMenuElement.MENUITEMMAXLENGTH - menuElements[index].CenterLength, topMargin + margin);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - menuElements[index].CenterLength,
+                Console.WindowHeight / 2  + margin);
             Console.Write(menuElements[index]);
 
             Console.ForegroundColor = ConsoleColor.Black;
-        }
-
-        public static void WriteGameResultTable() 
-        {
-        
         }
 
     }

@@ -13,7 +13,11 @@ bool exist = observer.IsPlayerExist(computerId);
 
 if (!exist)
 {
-    Console.WriteLine("Введите никнейм (можно будет поменять)");
+    string text = "Введите никнейм";
+    Console.SetCursorPosition(Console.WindowWidth / 2 - text.Length / 2, Console.WindowHeight / 2 - 2);
+    Console.Write(text);
+    Console.ForegroundColor = ConsoleColor.Blue;
+    Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2);
     string nickName = Console.ReadLine() ?? "SnakePlayer";
     observer.AddPlayer(computerId, nickName);
 

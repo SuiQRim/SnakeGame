@@ -12,7 +12,6 @@ namespace SnakeGame.MenuPrefab
     {
 
         private const int LEFTMARGIN = 10;
-        private const int TOPMARGIN = 5;
 
         protected static object isMenuUsing = new ();
 
@@ -31,7 +30,7 @@ namespace SnakeGame.MenuPrefab
             WriteMenu();
         }
 
-        protected event Action<int, int, List<AMenuElement>, int, bool> ChangeSelectedMenuElement;
+        protected event Action<List<AMenuElement>, int, bool> ChangeSelectedMenuElement;
 
         protected MenuKeyController _directionController;
 
@@ -41,7 +40,7 @@ namespace SnakeGame.MenuPrefab
 
         protected void WriteMenu() 
         {
-            ChangeSelectedMenuElement?.Invoke(LEFTMARGIN, TOPMARGIN, _menuElements, _index, true);
+            ChangeSelectedMenuElement?.Invoke(_menuElements, _index, true);
         } 
 
         public void EnterMenuElement()
@@ -81,7 +80,7 @@ namespace SnakeGame.MenuPrefab
                     return;
             }
 
-            ChangeSelectedMenuElement?.Invoke(LEFTMARGIN, TOPMARGIN, _menuElements, _index, false);
+            ChangeSelectedMenuElement?.Invoke( _menuElements, _index, false);
         }
     }
 }

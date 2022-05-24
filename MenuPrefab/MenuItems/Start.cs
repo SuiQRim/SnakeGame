@@ -16,7 +16,7 @@ namespace SnakeGame.MenuPrefab.MenuItems
             Observer observer = new();
             observer.SetGameResult(scene.GameResult);
 
-            return new EndGameMenu(_player);
+            return new EndGameMenu(_player, scene.GameResult);
         }
     }
 }
