@@ -37,17 +37,19 @@ namespace SnakeGame.Game
         public void Start() 
         {
             SpawnPoint();
+
+            View.WriteMenuInfoWindow(new List<string>() {"Нажмите чтобы начать..."}, ConsoleColor.Red);
+
             MapUpData?.Invoke(_point, _mapSize);
             SnakeUpData?.Invoke(_snake.BodyList, _mapSize);
-
-            View.WriteUnderMapWithSleep("Нажмите чтобы начать", _mapSize);
+            
             View.StartConfigurate(_mapSize);
             Sprint();
         }
 
         private void Sprint() 
         {
-            new Thread(() => TimeStep()).Start();
+            new Thread(TimeStep).Start();
             DateTime start = DateTime.Now;
             MapUpData?.Invoke(_point, _mapSize);
 

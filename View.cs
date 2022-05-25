@@ -18,6 +18,8 @@ namespace SnakeGame
 
         public static void StartConfigurate(Position _mapSize) 
         {
+            Console.ReadKey();
+            Console.Clear();
             WriteScoreBorder(_mapSize);
             WriteTimeBorder(_mapSize);
         }
@@ -28,7 +30,6 @@ namespace SnakeGame
             Console.SetCursorPosition(Console.WindowWidth / 2 -  text.Length / 2, Console.WindowHeight / 2);
             Console.WriteLine(text);
             Console.ReadKey();
-            Console.Clear();
         }
 
         private static void WriteScoreBorder(Position mapSize) 
@@ -105,7 +106,6 @@ namespace SnakeGame
         public static void UpDataLifeTime(TimeSpan timeSpan, Position mapSize) 
         {
             int mapHalfX = Console.WindowWidth / 2 - mapSize.PosX;
-            int mapHalfY = Console.WindowHeight / 2 - mapSize.PosY / 2;
 
             lock (cursor)
             {
@@ -157,7 +157,7 @@ namespace SnakeGame
             }
         }
 
- 
+
 
         public static void WriteSnake(List<Segment> bodyList, Position mapSize)
         {
@@ -187,7 +187,7 @@ namespace SnakeGame
             }
         }
 
-        private static void WriteAllMenuElement( List<AMenuElement> menuElements, bool needToClear)
+        private static void WriteAllMenuElement( List<AMenuElement> menuElements)
         {
 
             Console.ForegroundColor = ConsoleColor.White;
@@ -219,9 +219,9 @@ namespace SnakeGame
         }
 
 
-        public static void WriteSelectedMenuElement(List<AMenuElement> menuElements, int index, bool needToClear)
+        public static void WriteSelectedMenuElement(List<AMenuElement> menuElements, int index)
         {
-            WriteAllMenuElement( menuElements, needToClear);
+            WriteAllMenuElement( menuElements);
 
             Console.ForegroundColor = ConsoleColor.Green;
             int margin = 2 * index;

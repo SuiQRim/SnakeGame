@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SnakeGame.Binding;
+﻿using SnakeGame.Binding;
 using SnakeGame.MenuPrefab.MenuItems;
 using SnakeGame.Game;
+
 namespace SnakeGame.MenuPrefab
 {
     internal abstract class Menu
     {
-
-        private const int LEFTMARGIN = 10;
 
         protected static object isMenuUsing = new ();
 
@@ -30,7 +24,7 @@ namespace SnakeGame.MenuPrefab
             WriteMenu();
         }
 
-        protected event Action<List<AMenuElement>, int, bool> ChangeSelectedMenuElement;
+        protected event Action<List<AMenuElement>, int> ChangeSelectedMenuElement;
 
         protected MenuKeyController _directionController;
 
@@ -40,12 +34,11 @@ namespace SnakeGame.MenuPrefab
 
         protected void WriteMenu() 
         {
-            ChangeSelectedMenuElement?.Invoke(_menuElements, _index, true);
+            ChangeSelectedMenuElement?.Invoke(_menuElements, _index);
         } 
 
         public void EnterMenuElement()
         {
-            Console.Clear();
             _directionController.StopReadKey();
             _menuElements[_index].Do().Start();
         }
@@ -80,7 +73,7 @@ namespace SnakeGame.MenuPrefab
                     return;
             }
 
-            ChangeSelectedMenuElement?.Invoke( _menuElements, _index, false);
+            ChangeSelectedMenuElement?.Invoke( _menuElements, _index);
         }
     }
 }
