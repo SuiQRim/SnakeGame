@@ -11,11 +11,12 @@ namespace SnakeGame.SnakePrefab
             _moveController = new();
             HeadCrash += snake.Die;
             _childSegment = new Body(new Position(position), position);
+            _blockedDirrection = Direction.GetReverseOrintation(_moveController.Direction);
         }
 
         private event Action HeadCrash;
 
-        private Direction _blockedDirrection = new LeftWard();
+        private Direction _blockedDirrection;
 
         private readonly DirectionController _moveController;
         public DirectionController MoveController
