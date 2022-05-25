@@ -19,31 +19,31 @@ namespace SnakeGame.MenuPrefab
         public void Start() 
         {
             _index = 0;
-            _directionController = new(this);
+            _directionController = new(ChangeSelectedMenuItem);
             ChangeSelectedMenuElement += View.WriteSelectedMenuElement;
             WriteMenu();
         }
 
-        protected event Action<List<AMenuElement>, int> ChangeSelectedMenuElement;
+        private event Action<List<AMenuElement>, int> ChangeSelectedMenuElement;
 
-        protected MenuKeyController _directionController;
+        private MenuKeyController _directionController;
 
-        protected int _index;
+        private int _index;
 
         protected List<AMenuElement> _menuElements;
 
-        protected void WriteMenu() 
+        private void WriteMenu() 
         {
             ChangeSelectedMenuElement?.Invoke(_menuElements, _index);
         } 
 
-        public void EnterMenuElement()
+        private void EnterMenuElement()
         {
             _directionController.StopReadKey();
             _menuElements[_index].Do().Start();
         }
 
-        public void ChangeSelectedMenuItem(Direction direction) 
+        private void ChangeSelectedMenuItem(Direction direction) 
         {
             switch (direction)
             {

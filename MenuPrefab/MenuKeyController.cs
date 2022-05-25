@@ -4,9 +4,9 @@ namespace SnakeGame.MenuPrefab
 {
     internal class MenuKeyController : KeyController
     {
-        public MenuKeyController(Menu menu) : base()
+        public MenuKeyController(Action<Direction> action ) : base()
         {
-            ChangeDirection += menu.ChangeSelectedMenuItem;
+            ChangeDirection += action;
         }
 
         private event Action<Direction> ChangeDirection;
