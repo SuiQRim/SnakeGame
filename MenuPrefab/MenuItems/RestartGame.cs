@@ -16,7 +16,7 @@ namespace SnakeGame.MenuPrefab.MenuItems
         }
         public override Menu Do()
         {
-            Scene scene = new(15, 15, _player, new Snake(15, 15));
+            Scene scene = new(16, 16, _player);
             scene.Start();
 
             Observer observer = new();

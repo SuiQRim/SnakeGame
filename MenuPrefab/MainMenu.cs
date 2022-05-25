@@ -18,7 +18,7 @@ namespace SnakeGame.MenuPrefab
 
             _player = player;
 
-            View.WriteMenuInfoWindow(new List<string>() {$"Приветствую {player.NickName}!" });
+            View.WriteMenuInfoWindow(new List<string>() {$"Приветствую {player.NickName}!" }, ConsoleColor.Blue);
            
         }
 

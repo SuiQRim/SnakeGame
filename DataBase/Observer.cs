@@ -22,6 +22,10 @@ namespace SnakeGame.DataBase
             return pforil;
         }
 
+        public List<GameResult> GetAllResultFromPlayer( Player player) {
+
+            return _snakeDB.GameResults.Where(r => r.ComputerId == player.ComputerId).ToList();
+        }
         public List<GameResult> GetBestGameResultsFromProfils(List<Player> profils) 
         {
             List<GameResult> gameResults;

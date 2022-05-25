@@ -6,9 +6,9 @@ namespace SnakeGame.Game
     {
         private const int SLEEP = 150;
 
-        public Scene(int width, int heigh, Player player, Snake snake)
+        public Scene(int width, int heigh, Player player)
         {
-            _snake = snake;
+            _snake = new Snake(width, heigh);
             _mapSize = new Position(width, heigh);
             _player = player;
 
@@ -30,18 +30,18 @@ namespace SnakeGame.Game
         public GameResult GameResult { get; private set; }
 
         private event Action<Point, Position> MapUpData;
-        private event Action<List<Segment>> SnakeUpData;
-        private event Action<TimeSpan> TimeUpData;
-        private event Action<int> ChangeScore;
+        private event Action<List<Segment>, Position> SnakeUpData;
+        private event Action<TimeSpan, Position> TimeUpData;
+        private event Action<int, Position> ChangeScore;
 
         public void Start() 
         {
             SpawnPoint();
             MapUpData?.Invoke(_point, _mapSize);
-            SnakeUpData?.Invoke(_snake.BodyList);
+            SnakeUpData?.Invoke(_snake.BodyList, _mapSize);
 
             View.WriteUnderMapWithSleep("Нажмите чтобы начать", _mapSize);
-            View.StartConfigurate();
+            View.StartConfigurate(_mapSize);
             Sprint();
         }
 
@@ -60,7 +60,7 @@ namespace SnakeGame.Game
                     SpawnPoint();
                 }
                  
-                SnakeUpData?.Invoke(_snake.BodyList);
+                SnakeUpData?.Invoke(_snake.BodyList, _mapSize);
                 
                 Thread.Sleep(SLEEP);
             }
@@ -97,7 +97,7 @@ namespace SnakeGame.Game
             if (_snake.HeadPosition == _point.Position)
             {
                 _snake.Eat();
-                ChangeScore?.Invoke(++_score);
+                ChangeScore?.Invoke(++_score, _mapSize);
                 
                 _isPointExist = false;
             }
@@ -105,7 +105,7 @@ namespace SnakeGame.Game
 
         private void CheckTouchWithBorder(Position headPos) 
         {
-            if (headPos.PosX == -1 || headPos.PosX == _mapSize.PosX || headPos.PosY == -1 || headPos.PosY == _mapSize.PosY - 1)
+            if (headPos.PosX == -1 || headPos.PosX == _mapSize.PosX || headPos.PosY == -1 || headPos.PosY == _mapSize.PosY)
             {
                 _snake.TouchingWall();
             }
@@ -119,7 +119,7 @@ namespace SnakeGame.Game
             while (_snake.IsAlive) 
             {
                 
-                TimeUpData?.Invoke(new TimeSpan(second * 10000000));
+                TimeUpData?.Invoke(new TimeSpan(second * 10000000),_mapSize);
                 second++;
                 Thread.Sleep(1000);
             }

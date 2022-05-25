@@ -2,7 +2,7 @@
 using SnakeGame.MenuPrefab;
 using SnakeGame.Game;
 
-Console.SetWindowSize(50,25);
+Console.SetWindowSize(100,50);
 Console.CursorVisible = false;
 Console.Title = "Змейка";
 Console.OutputEncoding = System.Text.Encoding.UTF8;

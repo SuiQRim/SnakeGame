@@ -6,18 +6,8 @@ namespace SnakeGame
 {
     internal static class View
     {
-        private const int MAP_TOP_MARGIN = 5;
-        private const int MAP_LEFT_MARGIN = 10;
 
-        private const int TOP_PADDING = 2;
-        private const int LEFT_PADDING = 2;
-
-        private const int TIME_TOP_MARGIN = 3;
-        private const int TIME_LEFT_MARGIN = 8;
         private const int TIME_VALUEMAXLENGTH = 8;
-
-        private const int SCORE_TOP_MARGIN = 3;
-        private const int SCORE_LEFT_MARGIN = TIME_LEFT_MARGIN + (TIME_VALUEMAXLENGTH * 2) + 2;
         private const int SCORE_VALUEMAXLENGTH = 4;
 
         private const string UIHORIZONTALBORDER = "——";
@@ -26,23 +16,25 @@ namespace SnakeGame
 
         private static object cursor = new();
 
-        public static void StartConfigurate() 
+        public static void StartConfigurate(Position _mapSize) 
         {
-            WriteScoreBorder();
-            WriteTimeBorder();
+            WriteScoreBorder(_mapSize);
+            WriteTimeBorder(_mapSize);
         }
 
         public static void WriteUnderMapWithSleep(string text, Position position)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(Console.WindowWidth / 2 -  text.Length / 2, position.PosY / 2 + (MAP_TOP_MARGIN));
+            Console.SetCursorPosition(Console.WindowWidth / 2 -  text.Length / 2, Console.WindowHeight / 2);
             Console.WriteLine(text);
             Console.ReadKey();
             Console.Clear();
         }
 
-        private static void WriteScoreBorder() 
+        private static void WriteScoreBorder(Position mapSize) 
         {
+            int mapHalfX = Console.WindowWidth / 2 - mapSize.PosX;
+            int mapHalfY = Console.WindowHeight / 2 - mapSize.PosY / 2;
             Console.ForegroundColor = ConsoleColor.White;
 
             string text = "";
@@ -51,68 +43,76 @@ namespace SnakeGame
                 text += $"{UIHORIZONTALBORDER}";
             }
 
-            Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN - 1);
+            Console.SetCursorPosition(mapHalfX - 2, mapHalfY - 3);
             Console.WriteLine(text);
 
-            Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN);
+            Console.SetCursorPosition(mapHalfX - 2, mapHalfY - 2);
             Console.WriteLine(UIVERTICALBORDER);
 
-            Console.SetCursorPosition(SCORE_LEFT_MARGIN + (SCORE_VALUEMAXLENGTH * 2) - 2, SCORE_TOP_MARGIN);
+            Console.SetCursorPosition(mapHalfX + SCORE_VALUEMAXLENGTH , mapHalfY - 2);
             Console.WriteLine(UIVERTICALBORDER);
 
-            Console.SetCursorPosition(SCORE_LEFT_MARGIN, SCORE_TOP_MARGIN + 1);
+            Console.SetCursorPosition(mapHalfX - 2, mapHalfY - 1);
             Console.WriteLine(text);
 
             Console.ForegroundColor = ConsoleColor.Black;
         }
 
-        private static void  WriteTimeBorder() 
+        private static void WriteTimeBorder(Position mapSize) 
         {
+            int mapHalfX = Console.WindowWidth / 2 - mapSize.PosX;
+            int mapHalfY = Console.WindowHeight / 2 - mapSize.PosY / 2;
+
             Console.ForegroundColor = ConsoleColor.White;
 
             string text = "";
 
-            for (int i = 0; i < TIME_VALUEMAXLENGTH; i++)
+            for (int i = 0; i < TIME_VALUEMAXLENGTH - 2; i++)
             {
                 text += $"{UIHORIZONTALBORDER}";
             }
 
-            Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN - 1);
+            Console.SetCursorPosition(mapHalfX + mapSize.PosX * 2 - TIME_VALUEMAXLENGTH - 2, mapHalfY - 3);
             Console.WriteLine(text);
 
-            Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN);
+            Console.SetCursorPosition(mapHalfX + mapSize.PosX * 2, mapHalfY - 2);
             Console.WriteLine(UIVERTICALBORDER);
 
-            Console.SetCursorPosition(TIME_LEFT_MARGIN + (TIME_VALUEMAXLENGTH * 2) - 2, TIME_TOP_MARGIN);
+            Console.SetCursorPosition(mapHalfX + mapSize.PosX * 2 - TIME_VALUEMAXLENGTH - 2, mapHalfY - 2) ;
             Console.WriteLine(UIVERTICALBORDER);
 
-            Console.SetCursorPosition(TIME_LEFT_MARGIN, TIME_TOP_MARGIN + 1);
+            Console.SetCursorPosition(mapHalfX + mapSize.PosX * 2 - TIME_VALUEMAXLENGTH - 2, mapHalfY - 1);
             Console.WriteLine(text);
 
             Console.ForegroundColor = ConsoleColor.Black;
 
         }
 
-        public static void UpDataScore(int score) 
+        public static void UpDataScore(int score, Position mapSize) 
         {
+            int mapHalfY = Console.WindowHeight / 2 - mapSize.PosY / 2;
             lock (cursor) 
             {
+
                 Console.ForegroundColor= ConsoleColor.Green;
-                Console.SetCursorPosition(SCORE_LEFT_MARGIN + LEFT_PADDING, SCORE_TOP_MARGIN);
+                Console.SetCursorPosition(Console.WindowWidth / 2 - mapSize.PosX, mapHalfY - 2);
                 Console.WriteLine($"{score,SCORE_VALUEMAXLENGTH - 1}");
                 Console.ForegroundColor = ConsoleColor.Black;
             }
 
         }
 
-        public static void UpDataLifeTime(TimeSpan timeSpan) 
+        public static void UpDataLifeTime(TimeSpan timeSpan, Position mapSize) 
         {
+            int mapHalfX = Console.WindowWidth / 2 - mapSize.PosX;
+            int mapHalfY = Console.WindowHeight / 2 - mapSize.PosY / 2;
+
             lock (cursor)
             {
             
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.SetCursorPosition( TIME_LEFT_MARGIN + LEFT_PADDING, TIME_TOP_MARGIN);
-                Console.WriteLine(timeSpan);
+                Console.SetCursorPosition(mapHalfX + mapSize.PosX * 2 - TIME_VALUEMAXLENGTH, mapSize.PosY - 1);
+                Console.WriteLine(String.Format("{0:00}:{1:00}:{2:00}",timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
 
                 Console.ForegroundColor = ConsoleColor.Black;
             }
@@ -120,8 +120,12 @@ namespace SnakeGame
 
         public static void WriteMap(Point point, Position mapSize)
         {
+            int mapHalfX = Console.WindowWidth / 2 - mapSize.PosX;
+            int mapHalfY= Console.WindowHeight / 2 - mapSize.PosY / 2;
+
             lock (cursor)
             {
+                
                 Console.ForegroundColor = ConsoleColor.White;
                 string text = "";
                 for (int i = 0; i < mapSize.PosX * 2; i += 2)
@@ -129,23 +133,24 @@ namespace SnakeGame
                     text += $"{PIXEL}";
                 }
 
-                Console.SetCursorPosition(MAP_LEFT_MARGIN, MAP_TOP_MARGIN);
-                Console.WriteLine(text);
-
-                Console.SetCursorPosition(MAP_LEFT_MARGIN, MAP_TOP_MARGIN + mapSize.PosY);
-                Console.WriteLine(text);
-
-
-                for (int i = 0; i < mapSize.PosX + 1; i++)
+             
+                for (int i = 0; i < mapSize.PosY + 2; i++)
                 {
-                    Console.SetCursorPosition(MAP_LEFT_MARGIN - LEFT_PADDING, MAP_TOP_MARGIN + i);
+                    Console.SetCursorPosition(mapHalfX - 2, mapHalfY + i);
                     Console.Write($"{PIXEL}");
-                    Console.SetCursorPosition(MAP_LEFT_MARGIN + LEFT_PADDING + (mapSize.PosX * 2) - 2, MAP_TOP_MARGIN + i);
+                    Console.SetCursorPosition(mapHalfX + mapSize.PosX * 2, mapHalfY + i);
                     Console.Write($"{PIXEL}");
                 }
 
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(mapHalfX, mapHalfY);
+                Console.WriteLine(text);
+
+                Console.SetCursorPosition(mapHalfX, mapHalfY + mapSize.PosY + 1);
+                Console.WriteLine(text);
+
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.SetCursorPosition(MAP_LEFT_MARGIN + (point.Position.PosX * 2), MAP_TOP_MARGIN + point.Position.PosY + 1);
+                Console.SetCursorPosition(mapHalfX + (point.Position.PosX * 2), mapHalfY + point.Position.PosY + 1);
                 Console.Write($"{PIXEL}");
 
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -154,17 +159,19 @@ namespace SnakeGame
 
  
 
-        public static void WriteSnake(List<Segment> bodyList)
+        public static void WriteSnake(List<Segment> bodyList, Position mapSize)
         {
+            int mapHalfX = Console.WindowWidth / 2 - mapSize.PosX;
+            int mapHalfY = Console.WindowHeight / 2 - mapSize.PosY / 2;
+            Segment tail = bodyList.Last();
+
             lock (cursor)
             {
-                Segment tail = bodyList.Last();
-
-                Console.SetCursorPosition(MAP_LEFT_MARGIN + (tail.LastPosition.PosX * 2), MAP_TOP_MARGIN + tail.LastPosition.PosY + 1);
+                Console.SetCursorPosition(mapHalfX + (tail.LastPosition.PosX * 2), mapHalfY + tail.LastPosition.PosY + 1);
                 Console.Write("  ");
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.SetCursorPosition(MAP_LEFT_MARGIN + (bodyList.First().Position.PosX * 2), MAP_TOP_MARGIN + bodyList.First().Position.PosY + 1);
+                Console.SetCursorPosition(mapHalfX + (bodyList.First().Position.PosX * 2), mapHalfY + bodyList.First().Position.PosY + 1);
 
                 Console.Write(bodyList.First());
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -172,7 +179,7 @@ namespace SnakeGame
                 {
                     if (segment.GetType() == typeof(Head)) continue;
 
-                    Console.SetCursorPosition(MAP_LEFT_MARGIN + (segment.Position.PosX * 2), MAP_TOP_MARGIN + segment.Position.PosY + 1);
+                    Console.SetCursorPosition(mapHalfX + (segment.Position.PosX * 2), mapHalfY + segment.Position.PosY + 1);
                     Console.Write(segment);
                 }
 
@@ -197,18 +204,20 @@ namespace SnakeGame
             Console.ForegroundColor = ConsoleColor.Black;
         }
 
-        public static void WriteMenuInfoWindow(List<string> text) 
+
+        public static void WriteMenuInfoWindow(List<string> text, ConsoleColor color) 
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            int margin = 2;
+            Console.ForegroundColor = color;
+            int margin = 8;
             foreach (string item in text)
             {
-                Console.SetCursorPosition(Console.WindowWidth / 2 - item.Length / 2, TOP_PADDING + margin);
+                Console.SetCursorPosition(Console.WindowWidth / 2 - item.Length / 2, margin);
                 margin += 2;
                 Console.Write(item);
             }
         }
+
 
         public static void WriteSelectedMenuElement(List<AMenuElement> menuElements, int index, bool needToClear)
         {

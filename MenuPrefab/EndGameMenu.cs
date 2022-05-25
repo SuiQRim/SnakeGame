@@ -26,7 +26,8 @@ namespace SnakeGame.MenuPrefab
                                                   lastGameResult.LifeTime.Hours,
                                                   lastGameResult.LifeTime.Minutes,
                                                   lastGameResult.LifeTime.Seconds)}"
-            }) ;
+            }, 
+            ConsoleColor.Blue) ;
         }
 
     }

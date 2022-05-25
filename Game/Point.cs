@@ -22,9 +22,10 @@ namespace SnakeGame.Game
 
             do
             {
-                pos = new Position(rnd.Next(1, mapMax.PosX), rnd.Next(1, mapMax.PosY) - 1);
-            } 
+                pos = new Position(rnd.Next(1, mapMax.PosX), rnd.Next(1, mapMax.PosY));
+            }
             while (segmentPositions.Any(s => s.Position == pos));
+
 
             return pos;
         }
