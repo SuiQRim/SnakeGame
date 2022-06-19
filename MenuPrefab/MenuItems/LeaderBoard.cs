@@ -1,12 +1,12 @@
 ﻿using SnakeGame.Game;
 using SnakeGame.GameData;
-
+using SnakeGame.GameData.Score;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class LeaderBoard : AMenuElement
     {
-        public LeaderBoard(Player player) : base (player,"Таблица лидеров")
+        public LeaderBoard(Player player, ScoreObserver scoreObserver) : base(player, scoreObserver, "Таблица лидеров")
         {
 
         }

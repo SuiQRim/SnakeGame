@@ -1,12 +1,13 @@
 ﻿using SnakeGame.SnakePrefab;
 using SnakeGame.Game;
 using SnakeGame.GameData;
+using SnakeGame.GameData.Score;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class Start : AMenuElement
     {
-        public Start(Player player) : base (player, "Старт")  { }
+        public Start(Player player, ScoreObserver scoreObserver) : base(player, scoreObserver, "Старт")  { }
 
         public override Menu Do()
         {

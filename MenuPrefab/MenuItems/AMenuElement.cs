@@ -1,10 +1,11 @@
 ﻿using SnakeGame.Game;
+using SnakeGame.GameData.Score;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal abstract class AMenuElement
     {
-        public AMenuElement(Player player ,string name)
+        public AMenuElement( Player player, ScoreObserver scoreObserver, string name)
         {
             _player = player;
             _name = name;
