@@ -1,6 +1,6 @@
 ﻿using SnakeGame.SnakePrefab;
 using SnakeGame.Game;
-using SnakeGame.DataBase;
+using SnakeGame.GameData;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {

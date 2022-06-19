@@ -5,7 +5,7 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SnakeGame.DataBase.SnakeDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SnakeGame.GameData.SnakeDBContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@
             ContextKey = "SnakeGame.DataBase.SnakeDBContext";
         }
 
-        protected override void Seed(SnakeGame.DataBase.SnakeDBContext context)
+        protected override void Seed(SnakeGame.GameData.SnakeDBContext context)
         {
             //  This method will be called after migrating to the latest version.
 
