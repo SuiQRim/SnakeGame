@@ -1,12 +1,12 @@
 ﻿using SnakeGame.MenuPrefab.MenuItems;
 using SnakeGame.Game;
-using SnakeGame.DataBase.Score;
+using SnakeGame.DataBase;
 
 namespace SnakeGame.MenuPrefab
 {
     internal class EndGameMenu : Menu
     {
-        public EndGameMenu(Player player, GameResult lastGameResult, IScoreController scoreObserver) 
+        public EndGameMenu(Player player, GameResult lastGameResult, IScore scoreObserver) 
             : base(player, scoreObserver)
         {
             _menuElements = new()

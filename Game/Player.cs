@@ -6,7 +6,7 @@
         {
 
         }
-        public Player(string computerName, string nickName)
+        public Player(string nickName)
         {
             NickName = nickName;
             DateToCreate = DateTime.Now;

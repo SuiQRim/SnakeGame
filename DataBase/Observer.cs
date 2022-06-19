@@ -1,42 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using SnakeGame.Game;
 
 namespace SnakeGame.DataBase
 {
-    internal class Observer
+    abstract class Observer : IScore, IAccount
     {
         public Observer()
         {
-            if (!_snakeDB.Database.Exists())
-            {
-                throw new Exception();
-            }
 
         }
-        private readonly SnakeDBContext _snakeDB = new();
-        public bool IsPlayerExist(string computerName) => new SnakeDBContext().Players.Any(p => p.NickName == computerName);
-
-        public void AddPlayer(string computerName, string nickName) 
+        public Observer(Player player)
         {
-            _snakeDB.Players.Add(new Player(computerName, nickName));
-            _snakeDB.SaveChanges();
+            _player = player;
         }
 
-        public Player GetPlayerByComputerNickName(string computerId) 
+        public void OnConfigurate(Player player)
         {
-            Player pforil;
-            try
-            {
-                pforil = _snakeDB.Players.Where(p => p.NickName == computerId).SingleOrDefault();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            
-            return pforil;
+            _player = player;
         }
+
+        protected Player _player;
+
+        public abstract void SaveGameResult(GameResult gameResult);
+
+        public abstract List<Player> LoadAllPlayers();
+
+        public abstract List<GameResult> LoadBestResultsFromListOfPlayer();
+
+        public abstract List<GameResult> LoadGameResultsOfPlayer();
+
+        public abstract List<GameResult> LoadGameResultsOfPlayers();
+
+        public abstract void AddPlayer(Player player);
+
+        public abstract bool PlayerExists(Player player);
+
+        public abstract bool LoadPlayerByNickName();
+
     }
 }

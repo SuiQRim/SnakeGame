@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeGame.DataBase.Score
+namespace SnakeGame.DataBase
 {
-    internal class GlobalDB : ScoreObserver
+    internal class GlobalDB : Observer
     {
         public GlobalDB() { }
         public GlobalDB(Player player) : base(player) { }
@@ -24,7 +24,7 @@ namespace SnakeGame.DataBase.Score
             return _snakeDB.GameResults.Where(r => r.PlayerNickName == _player.NickName).ToList();
         }
 
-        public override void SaveGameResult(GameResult gameResult) 
+        public override void SaveGameResult(GameResult gameResult)
         {
             _snakeDB.GameResults.Add(gameResult);
             _snakeDB.SaveChanges();
@@ -51,6 +51,21 @@ namespace SnakeGame.DataBase.Score
         public override List<GameResult> LoadGameResultsOfPlayers()
         {
             return _snakeDB.GameResults.ToList();
+        }
+
+        public override void AddPlayer(Player player)
+        {
+            _snakeDB.Players.Add(player);
+        }
+
+        public override bool PlayerExists(Player player)
+        {
+            return _snakeDB.Players.ToList().Exists(p => p.NickName == player.NickName);
+        }
+
+        public override bool LoadPlayerByNickName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

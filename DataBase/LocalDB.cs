@@ -1,5 +1,4 @@
-﻿using SnakeGame.DataBase.Score;
-using SnakeGame.Game;
+﻿using SnakeGame.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ using System.Text.Json;
 
 namespace SnakeGame.DataBase
 {
-    internal class LocalDB : ScoreObserver
+    internal class LocalDB : Observer
     {
         public LocalDB()
         {
@@ -81,6 +80,26 @@ namespace SnakeGame.DataBase
             
             var json = JsonSerializer.Serialize(results);
             File.WriteAllText("Results.json", json);
+        }
+
+        public override void AddPlayer(Player player)
+        {
+            string path = "Players.json";
+            List<Player> players = LoadAllPlayers();
+            players.Add(player);
+
+            string json = JsonSerializer.Serialize(players);
+            File.WriteAllText(path, json);
+        }
+
+        public override bool PlayerExists(Player player)
+        {
+            return LoadAllPlayers().Exists(p => p.NickName == player.NickName);
+        }
+
+        public override bool LoadPlayerByNickName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

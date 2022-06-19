@@ -1,11 +1,11 @@
 ﻿using SnakeGame.Game;
-using SnakeGame.DataBase.Score;
+using SnakeGame.DataBase;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class Exit : AMenuElement
     {
-        public Exit(Player player, IScoreController scoreObserver ) : base (player, scoreObserver , "Выйти") { }
+        public Exit(Player player, IScore scoreObserver ) : base (player, scoreObserver , "Выйти") { }
 
         public override Menu Do()
         {

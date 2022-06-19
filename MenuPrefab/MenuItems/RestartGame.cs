@@ -1,12 +1,11 @@
 ﻿using SnakeGame.Game;
 using SnakeGame.DataBase;
-using SnakeGame.DataBase.Score;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class RestartGame : AMenuElement
     {
-        public RestartGame(Player player, IScoreController scoreObserver) : base(player, scoreObserver, "Играть снова")
+        public RestartGame(Player player, IScore scoreObserver) : base(player, scoreObserver, "Играть снова")
         {
            
         }

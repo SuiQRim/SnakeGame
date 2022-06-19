@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SnakeGame.Game;
 
-namespace SnakeGame.DataBase.Account
+namespace SnakeGame.DataBase
 {
-    internal interface IAccountController
+    internal interface IAccount
     {
-        public void AddPlayer();
+        public void AddPlayer(Player player);
 
-        public bool IsPlayerExists();
+        public bool PlayerExists(Player player);
 
         public bool LoadPlayerByNickName();
     }

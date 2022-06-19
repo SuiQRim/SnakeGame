@@ -1,12 +1,11 @@
 ﻿using SnakeGame.Game;
 using SnakeGame.DataBase;
-using SnakeGame.DataBase.Score;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class PlayerProfil : AMenuElement
     {
-        public PlayerProfil(Player player, IScoreController scoreObserver) : base(player, scoreObserver, "Профиль")
+        public PlayerProfil(Player player, IScore scoreObserver) : base(player, scoreObserver, "Профиль")
         {
 
         }
