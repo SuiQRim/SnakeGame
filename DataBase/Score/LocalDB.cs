@@ -12,6 +12,10 @@ namespace SnakeGame.DataBase
 {
     internal class LocalDB : ScoreObserver
     {
+        public LocalDB()
+        {
+
+        }
         public LocalDB(Player player) : base(player)
         {
             CreateFolders();
@@ -43,7 +47,7 @@ namespace SnakeGame.DataBase
 
             foreach (Player p in players)
             {
-                gameResults = LoadGameResultsOfPlayer(p).Where(r => r.ComputerId == p.ComputerId).ToList();
+                gameResults = LoadGameResultsOfPlayer(p).Where(r => r.PlayerNickName == p.NickName).ToList();
                 gameResults.Sort((r1, r2) => r2.Score.CompareTo(r1.Score));
                 BestGameResults.Add(gameResults.FirstOrDefault());
             }
@@ -54,11 +58,11 @@ namespace SnakeGame.DataBase
 
         public override List<GameResult> LoadGameResultsOfPlayer()
         {
-            return LoadGameResultsOfPlayers().Where(r => r.ComputerId == _player.ComputerId).ToList();
+            return LoadGameResultsOfPlayers().Where(r => r.PlayerNickName == _player.NickName).ToList();
         }
         public List<GameResult> LoadGameResultsOfPlayer(Player player)
         {
-            return LoadGameResultsOfPlayers().Where(r => r.ComputerId == player.ComputerId).ToList();
+            return LoadGameResultsOfPlayers().Where(r => r.PlayerNickName == player.NickName).ToList();
         }
 
         public override List<GameResult> LoadGameResultsOfPlayers()

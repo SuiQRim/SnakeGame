@@ -43,7 +43,7 @@ namespace SnakeGame.MenuPrefab.MenuItems
                     results.Add($"{nickName, - 14}   Нет результатов");
                     continue;
                 }
-                nickName = profils.Where(p => p.ComputerId == r.ComputerId).Single().NickName;
+                nickName = profils.Where(p => p.NickName == r.PlayerNickName).Single().NickName;
 
                 results.Add( $"{nickName,-16} {r.Score,6} {string.Format("{0:00}:{1:00}:{2:00}", 
                     r.LifeTime.Hours,

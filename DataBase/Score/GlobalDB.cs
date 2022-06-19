@@ -9,6 +9,7 @@ namespace SnakeGame.DataBase.Score
 {
     internal class GlobalDB : ScoreObserver
     {
+        public GlobalDB() { }
         public GlobalDB(Player player) : base(player) { }
 
         private readonly SnakeDBContext _snakeDB = new();
@@ -20,7 +21,7 @@ namespace SnakeGame.DataBase.Score
 
         public override List<GameResult> LoadGameResultsOfPlayer()
         {
-            return _snakeDB.GameResults.Where(r => r.ComputerId == _player.ComputerId).ToList();
+            return _snakeDB.GameResults.Where(r => r.PlayerNickName == _player.NickName).ToList();
         }
 
         public override void SaveGameResult(GameResult gameResult) 
@@ -39,7 +40,7 @@ namespace SnakeGame.DataBase.Score
 
             foreach (Player p in players)
             {
-                gameResults = _snakeDB.GameResults.Where(r => r.ComputerId == p.ComputerId).ToList();
+                gameResults = _snakeDB.GameResults.Where(r => r.PlayerNickName == p.NickName).ToList();
                 gameResults.Sort((r1, r2) => r2.Score.CompareTo(r1.Score));
                 BestGameResults.Add(gameResults.FirstOrDefault());
             }

@@ -76,7 +76,7 @@ namespace SnakeGame.Game
         {
             MapUpData?.Invoke(_point, _mapSize);
 
-            GameResult = new GameResult(_score, end - start, _player.ComputerId);
+            GameResult = new GameResult(_score, end - start, _player.NickName);
 
             View.WriteUnderMapWithSleep("Игра окончена...", _mapSize);
         }

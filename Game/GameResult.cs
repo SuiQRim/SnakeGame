@@ -11,13 +11,13 @@
         {
             Score = score;
             LifeTime = lifeTime;
-            ComputerId = computerId;
+            PlayerNickName = computerId;
             TimeToCreate = DateTime.Now;
         }
 
         public int Id { get; set; }
 
-        public string ComputerId { get; set; }
+        public string PlayerNickName { get; set; }
 
         public int Score { get; set; }
         

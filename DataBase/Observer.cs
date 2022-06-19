@@ -15,7 +15,7 @@ namespace SnakeGame.DataBase
 
         }
         private readonly SnakeDBContext _snakeDB = new();
-        public bool IsPlayerExist(string computerName) => new SnakeDBContext().Players.Any(p => p.ComputerId == computerName);
+        public bool IsPlayerExist(string computerName) => new SnakeDBContext().Players.Any(p => p.NickName == computerName);
 
         public void AddPlayer(string computerName, string nickName) 
         {
@@ -28,7 +28,7 @@ namespace SnakeGame.DataBase
             Player pforil;
             try
             {
-                pforil = _snakeDB.Players.Where(p => p.ComputerId == computerId).SingleOrDefault();
+                pforil = _snakeDB.Players.Where(p => p.NickName == computerId).SingleOrDefault();
             }
             catch (Exception)
             {

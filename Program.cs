@@ -3,12 +3,24 @@ using SnakeGame.DataBase.Score;
 using SnakeGame.MenuPrefab;
 using SnakeGame.Game;
 using System.Text.Json;
+using SnakeGame;
 
 Console.SetWindowSize(100, 50);
 Console.CursorVisible = false;
 Console.Title = "Змейка";
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
+SnakeDBContext snakeDB = new();
+ScoreObserver scoreObserver = new GlobalDB();
+
+if (!snakeDB.Database.Exists())
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    scoreObserver = new LocalDB();
+    List<string> serverStatus = new List<string>() { "Сервер не найден", "Включен автономный режим" };
+    View.WriteMenuInfoWindow(serverStatus, ConsoleColor.Red);
+
+}
 Console.ForegroundColor = ConsoleColor.White;
 string text = "Введите никнейм";
 Console.SetCursorPosition(Console.WindowWidth / 2 - text.Length / 2, Console.WindowHeight / 2 - 2);
@@ -28,7 +40,7 @@ if (!players.Exists(s => s.NickName == player.NickName))
     File.WriteAllText("Players.json", JsonSerializer.Serialize(players));
 }
 
-ScoreObserver scoreObserver = new LocalDB(player);
+scoreObserver.OnConfigurate(player);
 
 
 MainMenu menu = new (player, scoreObserver);

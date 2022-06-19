@@ -9,12 +9,21 @@ namespace SnakeGame.DataBase.Score
 {
     abstract class ScoreObserver : IScoreController
     {
+        public ScoreObserver()
+        {
+
+        }
         public ScoreObserver(Player player)
         {
             _player = player;
         }
 
-        protected readonly Player _player;
+        public void OnConfigurate(Player player) 
+        {
+            _player = player;
+        }
+
+        protected Player _player;
 
         public abstract void SaveGameResult(GameResult gameResult);
 
