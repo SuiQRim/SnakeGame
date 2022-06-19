@@ -1,13 +1,14 @@
 ﻿using SnakeGame.Game;
-using SnakeGame.GameData.Score;
+using SnakeGame.DataBase.Score;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal abstract class AMenuElement
     {
-        public AMenuElement( Player player, ScoreObserver scoreObserver, string name)
+        public AMenuElement( Player player, IScoreController scoreObserver, string name)
         {
             _player = player;
+            _scoreObserver = scoreObserver;
             _name = name;
         }
 
@@ -16,6 +17,8 @@ namespace SnakeGame.MenuPrefab.MenuItems
         public string _name;
 
         protected Player _player;
+
+        protected IScoreController _scoreObserver;
 
         public int Length
         {

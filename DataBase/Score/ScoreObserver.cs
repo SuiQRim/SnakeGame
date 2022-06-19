@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SnakeGame.DataBase.ResultDB;
 using SnakeGame.Game;
 
-namespace SnakeGame.GameData.Score
+namespace SnakeGame.DataBase.Score
 {
-    abstract class ScoreObserver : IGameResultController
+    abstract class ScoreObserver : IScoreController
     {
         public ScoreObserver(Player player)
         {

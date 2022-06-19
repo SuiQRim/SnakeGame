@@ -1,11 +1,11 @@
-﻿using SnakeGame.GameData.Score;
+﻿using SnakeGame.DataBase.Score;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeGame.GameData
+namespace SnakeGame.DataBase
 {
     //internal class LocalDB : GameDataBase
     //{

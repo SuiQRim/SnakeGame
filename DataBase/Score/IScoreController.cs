@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SnakeGame.Game;
 
-namespace SnakeGame.DataBase.ResultDB
+namespace SnakeGame.DataBase.Score
 {
-    internal interface IGameResultController
+    internal interface IScoreController
     {
         public void SaveGameResult(GameResult gameResult);
 

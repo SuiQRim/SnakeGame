@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using SnakeGame.Game;
 
-namespace SnakeGame.GameData
+namespace SnakeGame.DataBase
 {
     internal class SnakeDBContext : DbContext
     {

@@ -1,18 +1,18 @@
 ﻿using SnakeGame.MenuPrefab;
 using SnakeGame.Game;
-using SnakeGame.GameData.Score;
+using SnakeGame.DataBase.Score;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class LeaveToMainMenu : AMenuElement
     {
-        public LeaveToMainMenu(Player player, ScoreObserver scoreObserver) : base(player, scoreObserver, "Выйти в главное меню")
+        public LeaveToMainMenu(Player player, IScoreController scoreObserver) : base(player, scoreObserver, "Выйти в главное меню")
         {
 
         }
         public override Menu Do()
         {
-            return new MainMenu(_player);
+            return new MainMenu(_player, _scoreObserver);
         }
     }
 }

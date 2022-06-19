@@ -1,5 +1,5 @@
-﻿using SnakeGame.GameData;
-using SnakeGame.GameData.Score;
+﻿using SnakeGame.DataBase;
+using SnakeGame.DataBase.Score;
 using SnakeGame.MenuPrefab;
 using SnakeGame.Game;
 
@@ -29,6 +29,6 @@ Player profil = observer.GetPlayerByComputerId(computerId);
 ScoreObserver scoreObserver = new GlobalDB(profil);
 
 
-MainMenu menu = new (scoreObserver);
+MainMenu menu = new (profil, scoreObserver);
 menu.Start();
 

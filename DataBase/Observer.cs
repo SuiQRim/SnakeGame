@@ -2,7 +2,7 @@
 using System.Linq;
 using SnakeGame.Game;
 
-namespace SnakeGame.GameData
+namespace SnakeGame.DataBase
 {
     internal class Observer
     {
@@ -38,43 +38,5 @@ namespace SnakeGame.GameData
             
             return pforil;
         }
-
-        ////-
-        //public List<GameResult> GetAllResultFromPlayer( Player player) {
-
-        //    return _snakeDB.GameResults.Where(r => r.ComputerId == player.ComputerId).ToList();
-        //}
-
-        ////-
-        //public List<GameResult> GetBestGameResultsFromProfils(List<Player> profils) 
-        //{
-        //    List<GameResult> gameResults;
-
-        //    List<GameResult> BestGameResults = new();
-
-        //    foreach (Player p in profils)
-        //    {
-        //        gameResults = _snakeDB.GameResults.Where(r => r.ComputerId == p.ComputerId).ToList();
-        //        gameResults.Sort((r1 , r2 )=> r2.Score.CompareTo(r1.Score));
-        //        BestGameResults.Add(gameResults.FirstOrDefault());
-        //    }
-
-        //    return BestGameResults;
-        //}
-
-        ////-
-        //public void SetGameResult(GameResult gameResult) 
-        //{
-        //    _snakeDB.GameResults.Add(gameResult);
-        //    _snakeDB.SaveChanges();
-        //}
-
-        //-
-        public List<Player> GetAllProfils() 
-        {
-            return _snakeDB.Players.ToList();
-        }
-
-
     }
 }

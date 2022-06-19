@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeGame.GameData.Score
+namespace SnakeGame.DataBase.Score
 {
     internal class GlobalDB : ScoreObserver
     {

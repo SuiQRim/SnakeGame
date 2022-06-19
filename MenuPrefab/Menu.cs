@@ -1,7 +1,7 @@
 ﻿using SnakeGame.Binding;
 using SnakeGame.MenuPrefab.MenuItems;
 using SnakeGame.Game;
-using SnakeGame.GameData.Score;
+using SnakeGame.DataBase.Score;
 
 namespace SnakeGame.MenuPrefab
 {
@@ -10,7 +10,7 @@ namespace SnakeGame.MenuPrefab
 
         protected static object isMenuUsing = new ();
 
-        public Menu(Player player, ScoreObserver scoreObserver)
+        public Menu(Player player, IScoreController scoreObserver)
         {
             _player = player;
             _scoreObserver = scoreObserver;
@@ -19,7 +19,8 @@ namespace SnakeGame.MenuPrefab
 
         protected Player _player;
 
-        protected ScoreObserver _scoreObserver;
+        protected IScoreController _scoreObserver;
+
         public void Start() 
         {
             _index = 0;

@@ -1,19 +1,20 @@
 ﻿using SnakeGame.Binding;
 using SnakeGame.Game;
 using SnakeGame.MenuPrefab.MenuItems;
+using SnakeGame.DataBase.Score;
 
 namespace SnakeGame.MenuPrefab
 {
     internal class MainMenu : Menu
     {
-        public MainMenu(Player player) : base (player)
+        public MainMenu(Player player, IScoreController scoreObserver) : base (player, scoreObserver)
         {
             _menuElements = new()
             {
-                new Start(_scoreObserver),
-                new LeaderBoard(_scoreObserver),
-                new PlayerProfil(_scoreObserver),
-                new Exit(_scoreObserver)
+                new Start(player, _scoreObserver),
+                new LeaderBoard(player, _scoreObserver),
+                new PlayerProfil(player, _scoreObserver),
+                new Exit(player, _scoreObserver)
             };
 
             _player = player;

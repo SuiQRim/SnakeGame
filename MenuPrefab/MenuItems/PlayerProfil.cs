@@ -1,26 +1,24 @@
 ﻿using SnakeGame.Game;
-using SnakeGame.GameData;
-using SnakeGame.GameData.Score;
+using SnakeGame.DataBase;
+using SnakeGame.DataBase.Score;
 
 namespace SnakeGame.MenuPrefab.MenuItems
 {
     internal class PlayerProfil : AMenuElement
     {
-        public PlayerProfil(Player player, ScoreObserver scoreObserver) : base(player, scoreObserver, "Профиль")
+        public PlayerProfil(Player player, IScoreController scoreObserver) : base(player, scoreObserver, "Профиль")
         {
 
         }
 
         public override Menu Do()
         {
-            Observer observer = new();
-
-            List<GameResult> results = observer.GetAllResultFromPlayer(_player);
+            List<GameResult> results = _scoreObserver.LoadGameResults();
             List<string > listOfgResults = CreateTable(results);
             View.WriteMenuInfoWindow(listOfgResults, ConsoleColor.White);
             Console.ReadKey();
 
-            return new MainMenu(_player);
+            return new MainMenu(_player, _scoreObserver);
         }
 
         public static List<string> CreateTable(List<GameResult> gameResults)
