@@ -5,7 +5,7 @@ namespace SnakeGame.DataBase
 {
     internal class SnakeDBContext : DbContext
     {
-        public SnakeDBContext() : base(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SnakeDB;Integrated Security=True")
+        public SnakeDBContext() : base(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Sna;Integrated Security=True; Connect Timeout=3;")
         {
 
         }

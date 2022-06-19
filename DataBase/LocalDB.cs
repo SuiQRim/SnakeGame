@@ -20,8 +20,8 @@ namespace SnakeGame.DataBase
             DataExistence();
         }
 
-        private const string PLAYERS = @"..\Players.json";
-        private const string RESULTS = @"..\Results.json";
+        private const string PLAYERS = @"Players.json";
+        private const string RESULTS = @"Results.json";
         private void DataExistence() 
         {
             if (!File.Exists(PLAYERS))
