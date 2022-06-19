@@ -13,22 +13,36 @@ namespace SnakeGame.DataBase
     {
         public LocalDB()
         {
-
+            DataExistence();
         }
         public LocalDB(Player player) : base(player)
         {
-            CreateFolders();
+            DataExistence();
         }
 
-        private void CreateFolders()
+        private const string PLAYERS = @"..\Players.json";
+        private const string RESULTS = @"..\Results.json";
+        private void DataExistence() 
         {
-            //File.Create("Players.json").Close();
-            //File.Create("Results.json").Close();
+            if (!File.Exists(PLAYERS))
+            {
+                CreateJson(PLAYERS);
+            }
+            if (!File.Exists(RESULTS))
+            {
+                CreateJson(RESULTS);
+            }
+        }
+
+        private void CreateJson(string path)
+        {
+            File.Create(path).Close();
+            File.WriteAllText(path, "[]");
         }
 
         public override List<Player> LoadAllPlayers()
         {
-            string text = File.ReadAllText("Players.json");
+            string text = File.ReadAllText(PLAYERS);
 
             List<Player> players = new();
 
@@ -66,7 +80,7 @@ namespace SnakeGame.DataBase
 
         public override List<GameResult> LoadGameResultsOfPlayers()
         {
-            string text = File.ReadAllText("Results.json");
+            string text = File.ReadAllText(RESULTS);
 
             return JsonSerializer.Deserialize<List<GameResult>>(text).ToList();
          
@@ -79,12 +93,12 @@ namespace SnakeGame.DataBase
             results.Add(gameResult);
             
             var json = JsonSerializer.Serialize(results);
-            File.WriteAllText("Results.json", json);
+            File.WriteAllText(RESULTS, json);
         }
 
         public override void AddPlayer(Player player)
         {
-            string path = "Players.json";
+            string path = PLAYERS;
             List<Player> players = LoadAllPlayers();
             players.Add(player);
 
