@@ -15,6 +15,9 @@ namespace SnakeGame.DataBase.Score
 
         public List<GameResult> LoadBestResultsFromListOfPlayer();
 
-        public List<GameResult> LoadGameResults();
+        public List<GameResult> LoadGameResultsOfPlayer();
+
+        public List<GameResult> LoadGameResultsOfPlayers();
+
     }
 }

@@ -26,7 +26,12 @@ namespace SnakeGame.MenuPrefab.MenuItems
         {
             string nickName = "";
 
-            gameResults.Sort((s1,s2) => s2.Score.CompareTo(s1.Score));
+            gameResults.RemoveAll(r => r == null);
+
+            if (gameResults.Count > 1)
+            {
+                gameResults.Sort((s1,s2) => s2.Score.CompareTo(s1.Score));
+            }
 
             List<string> results = new();
             results.Add($"{"Никнейм",-16} {"Очки",6} {"Время жизни",16} {"Дата рекорда",18}");

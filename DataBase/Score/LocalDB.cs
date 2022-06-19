@@ -1,13 +1,82 @@
 ﻿using SnakeGame.DataBase.Score;
+using SnakeGame.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Text.Json;
 
 namespace SnakeGame.DataBase
 {
-    //internal class LocalDB : GameDataBase
-    //{
-    //}
+    internal class LocalDB : ScoreObserver
+    {
+        public LocalDB(Player player) : base(player)
+        {
+            CreateFolders();
+        }
+
+        private void CreateFolders()
+        {
+            //File.Create("Players.json").Close();
+            //File.Create("Results.json").Close();
+        }
+
+        public override List<Player> LoadAllPlayers()
+        {
+            string text = File.ReadAllText("Players.json");
+
+            List<Player> players = new();
+
+            return JsonSerializer.Deserialize<List<Player>>(text).ToList();
+
+        }
+
+        public override List<GameResult> LoadBestResultsFromListOfPlayer()
+        {
+            List<Player> players = LoadAllPlayers();
+
+            List<GameResult> gameResults;
+
+            List<GameResult> BestGameResults = new();
+
+            foreach (Player p in players)
+            {
+                gameResults = LoadGameResultsOfPlayer(p).Where(r => r.ComputerId == p.ComputerId).ToList();
+                gameResults.Sort((r1, r2) => r2.Score.CompareTo(r1.Score));
+                BestGameResults.Add(gameResults.FirstOrDefault());
+            }
+
+            return BestGameResults;
+
+        }
+
+        public override List<GameResult> LoadGameResultsOfPlayer()
+        {
+            return LoadGameResultsOfPlayers().Where(r => r.ComputerId == _player.ComputerId).ToList();
+        }
+        public List<GameResult> LoadGameResultsOfPlayer(Player player)
+        {
+            return LoadGameResultsOfPlayers().Where(r => r.ComputerId == player.ComputerId).ToList();
+        }
+
+        public override List<GameResult> LoadGameResultsOfPlayers()
+        {
+            string text = File.ReadAllText("Results.json");
+
+            return JsonSerializer.Deserialize<List<GameResult>>(text).ToList();
+         
+        }
+
+        public override void SaveGameResult(GameResult gameResult)
+        {
+            List<GameResult> results = LoadGameResultsOfPlayers();
+
+            results.Add(gameResult);
+            
+            var json = JsonSerializer.Serialize(results);
+            File.WriteAllText("Results.json", json);
+        }
+    }
 }

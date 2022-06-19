@@ -13,8 +13,8 @@ namespace SnakeGame.MenuPrefab.MenuItems
 
         public override Menu Do()
         {
-            List<GameResult> results = _scoreObserver.LoadGameResults();
-            List<string > listOfgResults = CreateTable(results);
+            List<GameResult> results = _scoreObserver.LoadGameResultsOfPlayer();
+            List<string> listOfgResults = CreateTable(results);
             View.WriteMenuInfoWindow(listOfgResults, ConsoleColor.White);
             Console.ReadKey();
 

@@ -8,5 +8,10 @@ namespace SnakeGame.DataBase.Account
 {
     internal interface IAccountController
     {
+        public void AddPlayer();
+
+        public bool IsPlayerExists();
+
+        public bool LoadPlayerByNickName();
     }
 }

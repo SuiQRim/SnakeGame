@@ -18,7 +18,7 @@ namespace SnakeGame.DataBase.Score
             return _snakeDB.Players.ToList();
         }
 
-        public override List<GameResult> LoadGameResults()
+        public override List<GameResult> LoadGameResultsOfPlayer()
         {
             return _snakeDB.GameResults.Where(r => r.ComputerId == _player.ComputerId).ToList();
         }
@@ -45,6 +45,11 @@ namespace SnakeGame.DataBase.Score
             }
 
             return BestGameResults;
+        }
+
+        public override List<GameResult> LoadGameResultsOfPlayers()
+        {
+            return _snakeDB.GameResults.ToList();
         }
     }
 }

@@ -13,12 +13,12 @@
             DateToCreate = DateTime.Now;
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         
-        public string ComputerId { get; private set; }
+        public string ComputerId { get; set; }
 
-        public string NickName { get; private set; }
+        public string NickName { get;  set; }
 
-        public DateTime DateToCreate { get; private set; }
+        public DateTime DateToCreate { get; set; }
     }
 }

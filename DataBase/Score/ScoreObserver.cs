@@ -22,7 +22,9 @@ namespace SnakeGame.DataBase.Score
 
         public abstract List<GameResult> LoadBestResultsFromListOfPlayer();
 
-        public abstract List<GameResult> LoadGameResults();
+        public abstract List<GameResult> LoadGameResultsOfPlayer();
+
+        public abstract List<GameResult> LoadGameResultsOfPlayers();
 
         
     }

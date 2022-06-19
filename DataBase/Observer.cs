@@ -23,7 +23,7 @@ namespace SnakeGame.DataBase
             _snakeDB.SaveChanges();
         }
 
-        public Player GetPlayerByComputerId(string computerId) 
+        public Player GetPlayerByComputerNickName(string computerId) 
         {
             Player pforil;
             try
