@@ -3,8 +3,7 @@ using SnakeGame.MenuPrefab;
 using SnakeGame.Game;
 using SnakeGame;
 
-Console.SetWindowSize(100, 50);
-Console.CursorVisible = false;
+Console.SetWindowSize(60, 30);
 Console.Title = "Змейка";
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -32,6 +31,7 @@ if (!observer.PlayerExists(player))
 {
     observer.AddPlayer(player);
 }
+Console.CursorVisible = false;
 
 observer.OnConfigurate(player);
 MainMenu menu = new (player, observer);

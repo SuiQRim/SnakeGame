@@ -106,12 +106,13 @@ namespace SnakeGame
         public static void UpDataLifeTime(TimeSpan timeSpan, Position mapSize) 
         {
             int mapHalfX = Console.WindowWidth / 2 - mapSize.PosX;
+            int mapHalfY = Console.WindowHeight / 2 - mapSize.PosY / 2;
 
             lock (cursor)
             {
             
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.SetCursorPosition(mapHalfX + mapSize.PosX * 2 - TIME_VALUEMAXLENGTH, mapSize.PosY - 1);
+                Console.SetCursorPosition(mapHalfX + mapSize.PosX * 2 - TIME_VALUEMAXLENGTH, mapHalfY - 2);
                 Console.WriteLine(String.Format("{0:00}:{1:00}:{2:00}",timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
 
                 Console.ForegroundColor = ConsoleColor.Black;
