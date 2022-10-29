@@ -9,13 +9,13 @@ using System.Text.Json;
 
 namespace SnakeGame.DataBase
 {
-    internal class LocalDB : Observer
+    internal class LocalStorage : Observer
     {
-        public LocalDB()
+        public LocalStorage()
         {
             DataExistence();
         }
-        public LocalDB(Player player) : base(player)
+        public LocalStorage(Player player) : base(player)
         {
             DataExistence();
         }

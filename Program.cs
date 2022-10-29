@@ -7,15 +7,8 @@ Console.SetWindowSize(60, 30);
 Console.Title = "Змейка";
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-SnakeDBContext snakeDB = new();
-Observer observer = new GlobalDB();
+Observer storage = new LocalStorage();
 
-if (!snakeDB.Database.Exists())
-{
-    observer = new LocalDB();
-    List<string> serverStatus = new List<string>() { "Сервер не найден", "Включен автономный режим" };
-    View.WriteMenuInfoWindow(serverStatus, ConsoleColor.Red);
-}
 
 Console.ForegroundColor = ConsoleColor.White;
 string text = "Введите никнейм";
@@ -27,13 +20,13 @@ string nickName = Console.ReadLine();
 
 Player player = new (nickName);
  
-if (!observer.PlayerExists(player))
+if (!storage.PlayerExists(player))
 {
-    observer.AddPlayer(player);
+    storage.AddPlayer(player);
 }
 Console.CursorVisible = false;
 
-observer.OnConfigurate(player);
-MainMenu menu = new (player, observer);
+storage.OnConfigurate(player);
+MainMenu menu = new (player, storage);
 menu.Start();
 
